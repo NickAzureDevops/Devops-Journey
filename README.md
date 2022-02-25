@@ -15,11 +15,24 @@ We will be using the following tools:
 - Testing the creation of resources using automated testing such as Inspec
 - Monitoring and setting up alerts using  Application and Container Insights
 
-1) Setting up Azure DevOps Environment
+1) ***Setting up Azure DevOps Environment***
 
-In this setup, I will show you how to set up the Azure DevOps Environment.
+In this setup, I will show you how to set up the Azure DevOps Environment including the
 
+- Azure DevOps Organisation Setup  
+- Azure DevOps Project Creation
+- Azure Service Principal Creation
 
+[Set up Guide](/Setting up Azure Devops Enviornment /Azure Devops Setup.md)
 
+1.1) Set up Terraform Backend - Create Blob Storage location for Terraform State file
 
+1.2) ***Create Azure AD Group for AKS Admins***
 
+- Create Azure AD AKS Admin Group
+
+2) ***Setup Azure DevOps Pipeline***
+
+This will create all of the Azure resources from the infrastructure in order to run and test applications.
+
+- Pipeline setup- Setting Azure DevOps Pipeline
