@@ -1,10 +1,25 @@
 # DevOps-Journey-Using-Azure-DevOps
 
-In this tutorial I will be showing you how to set up Azure devops and kubernetes cluster. This will be using the following:
+In this tutorial, I will be demonstrating to you on how you can use Azure DevOps from creating a pipeline to deploying an application to a Kubernetes cluster in Azure. I will be following the post "A DevOps journey using Azure DevOps" by Thomas Thornton.  
 
-- Setup Azure DevOps to  deploy to Azure using Pipelines
-- Deploy Azure resources using Terraform modules
-- Deploy test application to Azure Kubernetes Service
-- CI/CD with automated application deployments
-- Automated testing to test Azure resources 
-- Monitoring using Application & Container Insights
+<!--more-->
+
+![](/azure-devops/Images/DevopsJourney/logo.png)
+
+We will be using the following tools:
+
+- Setting up Azure DevOps Environment
+- Deploy Resource using Terraform modules
+- Deploy a simple test application to Azure AKS
+- Using CI/CD to automate the deployment of the process
+- Testing the creation of resources using automated testing such as Inspec
+- Monitoring and setting up alerts using  Application and Container Insights
+
+1) Setting up Azure DevOps Environment
+
+In this setup, I will show you how to set up the Azure DevOps Environment.
+
+
+
+
+
