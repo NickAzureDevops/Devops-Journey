@@ -23,11 +23,9 @@ In this setup, I will show you how to set up the Azure DevOps Environment includ
 - Azure DevOps Project Creation
 - Azure Service Principal Creation
 
-[Set up Guide](https://github.com/nicholaschangIT/Devops-Journey/blob/main/Devops-Journey/Setting-up-Azure-Devops-Enviornment/Azure-Devops-Setup.md)
+[Set up Guide](https://github.com/nicholaschangIT/Devops-Journey/Azure-Devops-Enviornment-Setup/setup.md)
 
-
-  - [Set up terraform](https://github.com/nicholaschangIT/DevOps-The-Hard-Way-Azure/blob/main/Terraform-AZURE-Services-Creation/Readme.md)
-
+- [Set up terraform](https://github.com/nicholaschangIT/DevOps-The-Hard-Way-Azure/blob/main/Terraform-AZURE-Services-Creation/Readme.md)
 
 1.1) Set up Terraform Backend - Create Blob Storage location for Terraform State file
 
