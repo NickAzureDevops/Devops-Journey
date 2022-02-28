@@ -52,3 +52,25 @@ Add Application Insights to Terraform
 - Add Azure Key Vault to Terraform - store secrets used the Azure DevOps Variable Group.
 
 - Update Pipeline to Deploy Application to AKS
+
+5. ***CI/CD***
+Introducing CI/CD to your pipeline
+
+Begin CI/CD with Pipeline Trigger for automatic pipeline runs
+Automated deployment of your AKS Application
+In previous labs; the application was initially manually setup for its build tag. In CI/CD, this would be automated and the Application on the AKS cluster would update each time the pipeline has been ran.
+
+6. ***Testing Azure Resourses***
+Testing Infrastructure using Inspec
+Using Inspec-Azure to test your Azure Resources
+Inspec Testing using Azure DevOps Pipeline
+Run Inspec-Tests using Azure DevOps
+View Inspec reports in Azure DevOps
+
+7. ***Monitoring and Alerting***
+Azure Application Insights
+Using Application Insights to view telemetry data!
+Azure Application Insights Availability Tests
+Configure availability test using Application Insights
+Log Analytics Container Insights
+Reviewing Log Analytics Container Insights

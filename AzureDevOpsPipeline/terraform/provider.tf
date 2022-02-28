@@ -6,7 +6,7 @@ provider "azurerm" {
 terraform {
     backend "azurerm" {
       resource_group_name = "devops-journey-rg"   
-      storage_account_name = "devopsjourneyazuredevops"
+      storage_account_name = "devopsjourney"
       container_name = "terraform.tfstate`"
     }
 }
