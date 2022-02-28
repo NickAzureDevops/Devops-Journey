@@ -4,7 +4,7 @@ In this tutorial, I will be demonstrating to you on how you can use Azure DevOps
 
 <!--more-->
 
-![](/Images/logo.png)
+![Logo](/Images/logo.png)
 
 We will be using the following for the lab:
 
