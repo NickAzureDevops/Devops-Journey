@@ -5,6 +5,22 @@ pool:
       vmImage: ubuntu-latest
     # Don't run against PRs
 
+variables:
+  - name: backendServiceArm
+    value: 'SP'
+  - name: backendAzureRmResourceGroupName
+    value: 'devops-journey-rg'
+  - name: backendAzureRmStorageAccountName
+    value: 'devopsjourney'
+  - name: backendAzureRmContainerName
+    value: 'tfstate'
+  - name: backendAzureRmKey
+    value: 'terraform.tfstate'
+  - name: environment
+    value: 'production'
+  - name: terraform_version
+    value: '0.15.4'
+
 stages :
   - stage: validate
     jobs:
@@ -20,12 +36,12 @@ stages :
         inputs:
           provider: 'azurerm'
           command: 'init'
-          backendServiceArm: 'SP1'
-          backendAzureRmResourceGroupName: 'terraformsf'
-          backendAzureRmStorageAccountName: 'storagestprd001'
-          backendAzureRmContainerName: 'tfstate'
-          backendAzureRmKey: 'dev.tfstate' 
-          workingDirectory: '$(System.DefaultWorkingDirectory)/WindowsVM/'
+          backendServiceArm: ${{ variables.backendServiceArm }}
+          backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+          backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+          backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+          backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
       - task: TerraformTaskV1@0
         displayName: 'validate'
         inputs:
@@ -48,17 +64,16 @@ stages :
                 inputs:
                   provider: 'azurerm'
                   command: 'init'
-                  backendServiceArm: 'SP1'
-                  backendAzureRmResourceGroupName: 'terraformsf'
-                  backendAzureRmStorageAccountName: 'storagestprd001'
-                  backendAzureRmContainerName: 'tfstate'
-                  backendAzureRmKey: 'dev.tfstate' 
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/WindowsVM/'
+                  backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+                  backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+                  backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+                  backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
               - task: TerraformTaskV1@0
                 displayName: 'destroy'
                 inputs:
                   provider: 'azurerm'
                   command: 'destroy'
-                  commandOptions: -input=false -var "admin_password=$(admin_password)"
-                  environmentServiceNameAzureRM: 'SP1'
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/WindowsVM/'
+                  commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
+                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
