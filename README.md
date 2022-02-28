@@ -35,14 +35,12 @@ This will create all of the Azure resources from the infrastructure in order to 
 
 3.***Deploy Application to Azure Container Registry***
 
-- Deploy a sample Application to Container Registry.
+- Deploy a Application to Container Registry.
 - Build the Docker Image Locally
-- Run The Docker Image Locally
-- Deploy sample Application to Container Register
+- Run Docker Image Locally
+- Deploy Application to Container Register
 
 4.***Deploy Application to Azure Kubernetes Cluster***
-
-These will include the following 
 
 - Add AKS ACR Role assignment- Terraform to add role assignment for AKS managed identity to access the deployed ACR
 Add Application Insights to Terraform
