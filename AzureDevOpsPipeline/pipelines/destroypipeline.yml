@@ -48,28 +48,28 @@ stages :
           provider: 'azurerm'
           command: 'validate'
 
-stages :
-  - stage: destroy_production
+ - stage: destroy
+    dependsOn: [validate]
+    condition: succeeded('validate')
     jobs:
-    - job: validate
-      continueOnError: false
-      steps:
-      - task: TerraformInstaller@0
-        displayName: 'install'
-        inputs:
-          terraformVersion: ${{ variables.terraform_version}}
-      - task: TerraformTaskV2@2
-        displayName: 'init'
-        inputs:
-          provider: 'azurerm'
-          command: 'init'
-          backendServiceArm: ${{ variables.backendServiceArm }}
-          backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
-          backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
-          backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-          backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
-      - task: TerraformTaskV1@0
+      - job: terraform_destroy
+        steps:
+        - task: TerraformInstaller@0
+          displayName: 'install'
+          inputs:
+            terraformVersion: ${{ variables.terraform_version}}
+              - task: TerraformTaskV1@0
+                displayName: 'init'
+                inputs:
+                  provider: 'azurerm'
+                  command: 'init'
+                 backendServiceArm: ${{ variables.backendServiceArm }}
+                 backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+                 backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+                 backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+                 backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+                workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+            - task: TerraformTaskV1@0
                 displayName: 'destroy'
                 inputs:
                   provider: 'azurerm'
