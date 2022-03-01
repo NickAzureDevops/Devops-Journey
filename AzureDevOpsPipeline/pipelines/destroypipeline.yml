@@ -48,41 +48,11 @@ stages :
           provider: 'azurerm'
           command: 'validate'
           
-  - stage: plan
+  - stage: destroy
     dependsOn: [validate]
     condition: succeeded('validate')
     jobs:
-      - job: terraform_plan_develop
-        steps:
-        - task: TerraformInstaller@0
-          displayName: 'install'
-          inputs:
-            terraformVersion: ${{ variables.terraform_version}}
-        - task: TerraformTaskV2@2
-          displayName: 'init'
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            backendServiceArm: ${{ variables.backendServiceArm }}
-            backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
-            backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
-            backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-            backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
-        - task: TerraformTaskV2@2
-          displayName: 'plan'
-          inputs:
-            provider: 'azurerm'
-            command: 'plan'
-            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
-            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
-
-  - stage: apply
-    dependsOn: [plan]
-    condition: succeeded('plan')
-    jobs:
-      - job: terraform_apply_develop
+      - job: terraform_destroy
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
@@ -100,18 +70,10 @@ stages :
             backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: TerraformTaskV2@2
-          displayName: 'plan'
+          displayName: 'destroy'
           inputs:
             provider: 'azurerm'
-            command: 'plan'
-            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
-            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
-        - task: TerraformTaskV2@2
-          displayName: 'apply'
-          inputs:
-            provider: 'azurerm'
-            command: 'apply'
+            command: 'destroy'
             commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
