@@ -27,7 +27,7 @@ module "aks" {
   location                   = var.location
   ssh_public_key             = var.ssh_public_key
   log_analytics_workspace_id = module.loganalytics.id
-  aks_subnet                 = module.vnet_aks.aks_subnet_id   (Is this not mean to be vnet_aks.aks_subne)    
+  aks_subnet                 = module.vnet_aks.aks_subnet_id     
   agic_subnet_id             = module.vnet_aks.appgw_subnet_id
   environment = var.environment
 
