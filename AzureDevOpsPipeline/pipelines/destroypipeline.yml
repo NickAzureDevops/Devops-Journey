@@ -47,33 +47,34 @@ stages :
         inputs:
           provider: 'azurerm'
           command: 'validate'
-
+          
  - stage: destroy
     dependsOn: [validate]
     condition: succeeded('validate')
     jobs:
-      - job: terraform_destroy
+      - job: terraform_destroy_develop
         steps:
-        - task: TerraformInstaller@0
-          displayName: 'install'
-          inputs:
-            terraformVersion: ${{ variables.terraform_version}}
-              - task: TerraformTaskV1@0
-                displayName: 'init'
+              - checkout: self
+              - task: TerraformInstaller@0
+                displayName: 'install'
                 inputs:
-                  provider: 'azurerm'
-                  command: 'init'
-                 backendServiceArm: ${{ variables.backendServiceArm }}
-                 backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
-                 backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
-                 backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-                 backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-                workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
-            - task: TerraformTaskV1@0
-                displayName: 'destroy'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'destroy'
-                  commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
-                  environmentServiceNameAzureRM: '${{ variables.backendAzureRmKey }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+                  terraformVersion: '0.13.4'
+      - task: TerraformTaskV2@2
+        displayName: 'init'
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: ${{ variables.backendServiceArm }}
+          backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+          backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+          backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+          backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+      - task: TerraformTaskV2@2
+        displayName: 'destroy'
+        inputs:
+          provider: 'azurerm'
+          command: 'destroy'
+          commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
+          environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
