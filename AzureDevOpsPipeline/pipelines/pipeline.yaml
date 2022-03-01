@@ -19,7 +19,7 @@ variables:
   - name: environment
     value: 'production'
   - name: terraform_version
-    value: '0.13.4'
+    value: '0.15.4'
 
 stages :
   - stage: validate
@@ -41,7 +41,7 @@ stages :
           backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
           backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
           backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
       - task: TerraformTaskV2@2
         displayName: 'validate'
         inputs:
@@ -68,7 +68,7 @@ stages :
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
@@ -76,7 +76,7 @@ stages :
             command: 'plan'
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
 
   - stage: apply
     dependsOn: [plan]
@@ -106,7 +106,7 @@ stages :
             command: 'plan'
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'apply'
           inputs:
@@ -114,4 +114,4 @@ stages :
             command: 'apply'
             commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
