@@ -1,6 +1,5 @@
 resource "azurerm_resource_group" "acr_resource_group" {
   name     = "${var.name}-rg"
-  name     = var.name
   location = var.location
 
   tags = {
