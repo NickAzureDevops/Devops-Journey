@@ -41,7 +41,7 @@ stages :
           backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
           backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
           backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
       - task: TerraformTaskV1@0
         displayName: 'validate'
         inputs:
@@ -68,7 +68,7 @@ stages :
                   backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
                   backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
                   backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
               - task: TerraformTaskV1@0
                 displayName: 'destroy'
                 inputs:
@@ -76,4 +76,4 @@ stages :
                   command: 'destroy'
                   commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
                   environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
