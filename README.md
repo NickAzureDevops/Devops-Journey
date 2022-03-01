@@ -28,7 +28,7 @@ In this setup, I will show you how to set up the Azure DevOps Environment and cr
 
 This will create all of the Azure resources from the infrastructure in order to run and test applications.
 
-2.1 Pipeline setup - Setting Azure DevOps Pipeline includes the following
+2.1 Pipeline setup - Setting Azure DevOps Pipeline with creating the following resources
 
 - Azure Container Registry
 - Azure Virtual Network
@@ -55,13 +55,10 @@ Add Application Insights to Terraform
 
 5.***CI/CD***
 
-- Deploy CI/CD pipeline
-- Pipeline Trigger for automatic pipeline runs
-- Automated deployment of your AKS Application
+- Deploy CI/CD pipeline- Pipeline Trigger for automatic pipeline runs and automated deployment of your AKS Application
 
 6.***Testing Azure Resourses***
 
-- Testing Infrastructure using Inspec
 - Inspec Testing using Azure DevOps Pipeline
 - Run Inspec-Tests using Azure DevOps
 - View Inspec reports in Azure DevOps
@@ -69,7 +66,5 @@ Add Application Insights to Terraform
 7.***Monitoring and Alerting***
 
 - Using Application Insights to view telemetry data!
-- Azure Application Insights Availability Tests
 - Configure availability test using Application Insights
-- Log Analytics Container Insights
 - Reviewing Log Analytics Container Insights
