@@ -52,7 +52,7 @@ stages :
     dependsOn: [validate]
     condition: succeeded('validate')
     jobs:
-      - job: terraform_plan_develop
+      - job: terraform_plan
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
@@ -82,7 +82,7 @@ stages :
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-      - job: terraform_apply_develop
+      - job: terraform_apply
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
