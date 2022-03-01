@@ -48,17 +48,16 @@ stages :
           provider: 'azurerm'
           command: 'validate'
           
- - stage: destroy
+- stage: destroy
     dependsOn: [validate]
     condition: succeeded('validate')
     jobs:
-      - job: terraform_destroy_develop
+      - job: terraform_destroy
         steps:
-              - checkout: self
-              - task: TerraformInstaller@0
-                displayName: 'install'
-                inputs:
-                  terraformVersion: '0.13.4'
+        - task: TerraformInstaller@0
+          displayName: 'install'
+          inputs:
+            terraformVersion: ${{ variables.terraform_version}}
       - task: TerraformTaskV2@2
         displayName: 'init'
         inputs:

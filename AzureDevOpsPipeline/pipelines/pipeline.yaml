@@ -41,7 +41,7 @@ stages :
           backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
           backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
           backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
       - task: TerraformTaskV2@2
         displayName: 'validate'
         inputs:
