@@ -17,7 +17,7 @@ variables:
   - name: backendAzureRmKey
     value: 'terraform.tfstate'
   - name: environment
-    value: 'production/production
+    value: 'production/production'
   - name: terraform_version
     value: '0.15.4'
 
