@@ -20,6 +20,7 @@ variables:
     value: 'staging/staging'
   - name: terraform_version
     value: '0.15.4'
+  - name: 
 
 stages :
   - stage: validate
@@ -77,9 +78,10 @@ stages :
             commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
-        - task: Bash@3
-          inputs:
-          targetType: 'inline'
-          script: |
-            "Remove-ResourceGroup -Name DefaultResourceGroup-SUK -Force"
-          failOnStderr: true
+        - task: AzurePowerShell@5
+        displayName: 'Azure PowerShell script: InlineScript'
+        inputs:
+        azureSubscription: SP
+        ScriptType: InlineScript
+        Inline: 'Remove-AzResourceGroup -Name DefaultResourceGroup-SUK -Force'
+        preferredAzurePowerShellVersion: 5
