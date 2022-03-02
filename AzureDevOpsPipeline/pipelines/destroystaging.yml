@@ -78,7 +78,7 @@ stages :
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: AzurePowerShell@5
-           displayName: 'Azure PowerShell script: InlineScript'
+           displayName: 'Azure PowerShell script'
            inputs:
               azureSubscription: SP
               ScriptType: InlineScript
