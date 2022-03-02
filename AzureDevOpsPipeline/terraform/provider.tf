@@ -1,6 +1,11 @@
 provider "azurerm" {
     version = "~> 2.0"
-    features {}
+    features {
+          log_analytics_workspace {
+         purge_soft_delete_on_destroy = true
+    }
+}
+
 }
 
 terraform {

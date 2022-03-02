@@ -9,7 +9,7 @@ In this step we will deploy all the resources required for Azure Devops and set 
 
 We will start by setting up the Azure Devops Pipeline. First, fork a copy of the pipeline and terraform code here and clone it to your Aure Devops repo. [Pipelines]](https://github.com/nicholaschangIT/Devops-Journey/tree/main/AzureDevOpsPipeline)
 
-To create an Azure repository click on repos and 
+To create an Azure repository click on repos and
 
 
 Create Azure repository - select Repos & you will see various options to setup a respository (This repository will store code throughout further labs also, please note this!)
