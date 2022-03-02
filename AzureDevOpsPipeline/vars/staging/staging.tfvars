@@ -4,10 +4,10 @@ location                     = "uksouth"
 
 # Virtual Network
 vnet_name                   = "devopsjourney-vnet"
-network_address_space       = "192.168.1.0/16"
-aks_subnet_address_prefix   = "192.168.1.0/24"
+network_address_space       = "192.168.0.0/16"
+aks_subnet_address_prefix   = "192.168.0.0/24"
 aks_subnet_address_name     = "aks"
-appgw_subnet_address_prefix = "192.168.2.0/24"
+appgw_subnet_address_prefix = "192.168.1.0/24"
 appgw_subnet_address_name   = "appgw"
 
 # AKS
@@ -20,4 +20,4 @@ ssh_public_key     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDrt/GYkYpuQYRxM3lgjO
 # ACR
 acr_name = "devopsjourney"
 
-environment = "production"
+environment = "staging"

@@ -28,7 +28,7 @@ In this setup, I will show you how to set up the Azure DevOps Environment and cr
 
 This will create all of the Azure resources from the infrastructure in order to run and test applications.
 
-2.1 Pipeline setup - Setting Azure DevOps Pipeline with creating the following resources
+2.1 [Pipeline setup](https://github.com/nicholaschangIT/Devops-Journey/blob/main/AzureDevOpsPipeline/Environment-Readme.md) - Setting Azure DevOps Pipeline with creating the following resources
 
 - Azure Container Registry
 - Azure Virtual Network
