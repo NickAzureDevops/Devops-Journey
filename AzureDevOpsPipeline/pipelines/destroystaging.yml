@@ -20,7 +20,6 @@ variables:
     value: 'staging/staging'
   - name: terraform_version
     value: '0.15.4'
-  - name: 
 
 stages :
   - stage: validate
