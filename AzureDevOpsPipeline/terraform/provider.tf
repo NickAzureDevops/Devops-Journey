@@ -1,13 +1,7 @@
 provider "azurerm" {
     version = "~> 2.0"
-    features {
-          log_analytics_workspace {
-         purge_soft_delete_on_destroy = true
-    }
+    features {}
 }
-
-}
-
 terraform {
     backend "azurerm" {
       resource_group_name = "devops-journey-rg"   
