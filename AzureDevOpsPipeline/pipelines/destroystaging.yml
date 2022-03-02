@@ -77,13 +77,11 @@ stages :
             commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
-        - task: AzurePowerShell@5
+        steps:
+        - task: AzurePowerShell@2
           displayName: 'Azure PowerShell script: InlineScript'
           inputs:
           azureSubscription: SP
           ScriptType: InlineScript
           Inline: 'Remove-AzResourceGroup -Name DefaultResourceGroup-SUK -Force'
-          errorActionPreference: silentlyContinue
           azurePowerShellVersion: LatestVersion
-
-      
