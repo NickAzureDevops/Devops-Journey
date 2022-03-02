@@ -77,7 +77,6 @@ stages :
             commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
-        steps:
         - task: AzurePowerShell@2
           displayName: 'Azure PowerShell script: InlineScript'
           inputs:
