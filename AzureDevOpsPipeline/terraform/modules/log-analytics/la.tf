@@ -6,10 +6,6 @@ resource "azurerm_resource_group" "kubernetes_resource_group" {
   }
 }
 
-resource "azurerm_resource_group" "kubernetes_resource_group" {
- name     = "DefaultResourceGroup-SUK"
-
-}
 resource "azurerm_log_analytics_workspace" "Log_Analytics_WorkSpace" {
     # The WorkSpace name has to be unique across the whole of azure, not just the current subscription/tenant.
     name                = var.log_analytics_workspace_name
