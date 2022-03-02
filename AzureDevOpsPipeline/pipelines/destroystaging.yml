@@ -78,9 +78,9 @@ stages :
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: AzurePowerShell@5
-        displayName: 'Azure PowerShell script: InlineScript'
-        inputs:
-        azureSubscription: SP
-        ScriptType: InlineScript
-        Inline: 'Remove-AzResourceGroup -Name DefaultResourceGroup-SUK -Force'
-        preferredAzurePowerShellVersion: 5
+           displayName: 'Azure PowerShell script: InlineScript'
+           inputs:
+              azureSubscription: SP
+              ScriptType: InlineScript
+              Inline: 'Remove-AzResourceGroup -Name DefaultResourceGroup-SUK -Force'
+           preferredAzurePowerShellVersion: 5
