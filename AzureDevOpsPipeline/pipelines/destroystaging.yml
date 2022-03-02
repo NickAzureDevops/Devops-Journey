@@ -3,6 +3,9 @@ name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 trigger:
   - none
   
+pool:
+  vmImage: windows-latest
+
     # Don't run against PRs
 
 variables:
