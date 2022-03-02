@@ -5,7 +5,6 @@ module "loganalytics" {
   log_analytics_workspace_sku  = "PerGB2018"
   environment = var.environment
 }
-
 module "vnet_aks" {
   source                      = "./modules/vnet"
   name                        = var.vnet_name
@@ -38,7 +37,6 @@ module "aks" {
   }
 
 }
-
 module "acr" {
   source   = "./modules/acr"
   name     = var.acr_name
