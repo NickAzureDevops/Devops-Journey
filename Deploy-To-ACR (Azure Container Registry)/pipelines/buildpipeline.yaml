@@ -121,12 +121,6 @@ stages :
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
-- stage: Build
-    displayName: Build and push stage
-    jobs:  
-    - job: Build
-      displayName: Build job
-      steps:
       - task: Docker@2
         displayName: Build and push an image to container registry
         inputs:
