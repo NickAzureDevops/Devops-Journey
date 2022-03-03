@@ -12,19 +12,19 @@ I will be showing you how to set up the Azure DevOps Environment for this lab.
 
 3. Create a New project, give it a name and a description. Set the project to private.
 
-![](/1.Azure-Devops-Enviornment-Setup/images/projectcreation.png)
+![](/Azure-Devops-Enviornment-Setup/images/projectcreation.png)
 
 4. At this point we will start creating the service principal that will authenticate to your Azure subscription.
 
 In your project select project settings, select Service Connections under Pipelines. Once selected the service connection go to Azure resource manager and choose Service Principle (Automatic). Enter the subscription and resource group and give the service connection a name to start creating it for your resource. (Please remember to tick the option "grant access to all pipeline")
 
-![ServicePrincipleCreation](/1.Azure-Devops-Enviornment-Setup/images/SP.png)
+![ServicePrincipleCreation](/Azure-Devops-Enviornment-Setup/images/SP.png)
 
-![CreationofSP](/1.Azure-Devops-Enviornment-Setup/images/serviceprinciple.png)
+![CreationofSP](/Azure-Devops-Enviornment-Setup/images/serviceprinciple.png)
 
 5. In the created connection, click on the “manage service principle” icon then it will be directed back to the Azure portal. Under Branding & Properties, edit the name and click on save.
 
-![RenameIdentity](/1.Azure-Devops-Enviornment-Setup/images/renameidentity.png)
+![RenameIdentity](/Azure-Devops-Enviornment-Setup/images/renameidentity.png)
 
 6. The next step is to give the identity a contributor role access.
 
