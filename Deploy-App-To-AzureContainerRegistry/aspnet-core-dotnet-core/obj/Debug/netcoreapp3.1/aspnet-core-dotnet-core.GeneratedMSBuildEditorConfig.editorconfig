@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = aspnet_core_dotnet_core
+build_property.ProjectDir = /Users/nicholaschang/Documents/GITREPOS/Azure/DevOps-Journey-Using-Azure-DevOps/Deploy-App-To-AzureContainerRegistry/aspnet-core-dotnet-core/
