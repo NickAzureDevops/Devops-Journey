@@ -37,7 +37,7 @@ This will create all of the Azure resources from the infrastructure in order to 
 
 3.***Deploy Application to Azure Container Registry***
 
-[Container Registry Set up](https://github.com/nicholaschangIT/Devops-Journey/blob/main/Azure-Devops-Enviornment-Setup/Environment-Azure-DevOps-Setup.md) This will set up image and deploy to container registry. 
+3.1 [Container Registry Set up](https://github.com/nicholaschangIT/Devops-Journey/blob/main/Deploy-App-To-AzureContainerRegistry/README.md) This will set up image and deploy to container registry. 
 
 - Deploy a Application to Container Registry.
 - Build the Docker Image Locally
