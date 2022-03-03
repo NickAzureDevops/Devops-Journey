@@ -1,7 +1,7 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
 trigger: none
-
+      
 # Don't run against PRs
 pr: none
 
@@ -17,7 +17,7 @@ variables:
   - name: backendAzureRmKey
     value: 'terraform.tfstate'
   - name: environment
-    value: 'production/production'
+    value: 'staging/staging'
   - name: terraform_version
     value: '0.15.4'
   - name: repository
@@ -47,7 +47,7 @@ stages :
           backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
           backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
           backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
       - task: TerraformTaskV2@2
         displayName: 'validate'
         inputs:
@@ -58,7 +58,7 @@ stages :
     dependsOn: [validate]
     condition: succeeded('validate')
     jobs:
-      - job: terraform_plan_develop
+      - job: terraform_plan
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
@@ -74,7 +74,7 @@ stages :
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
@@ -82,13 +82,13 @@ stages :
             command: 'plan'
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
 
   - stage: apply
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-      - job: terraform_apply_develop
+      - job: terraform_apply
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
@@ -104,7 +104,7 @@ stages :
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
-            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
@@ -112,16 +112,16 @@ stages :
             command: 'plan'
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'apply'
           inputs:
             provider: 'azurerm'
             command: 'apply'
-            commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
+            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
-  - stage: Build
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+- stage: Build
     displayName: Build and push stage
     jobs:  
     - job: Build
@@ -135,3 +135,4 @@ stages :
           dockerfile: ${{ variables.dockerfile }}
           containerRegistry: ${{ variables.containerRegistry }}
           tags: $(Build.BuildId)
+ 
