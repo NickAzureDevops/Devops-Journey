@@ -22,7 +22,7 @@ variables:
     value: '0.15.4'
 
   - name: repository
-    value: 'devopsjourney'
+    value: 'devopsjourney1'
   - name: dockerfile
     value: '$(Build.SourcesDirectory)/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry

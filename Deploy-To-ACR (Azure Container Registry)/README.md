@@ -2,9 +2,8 @@
 
 This secontion will deploy an Application to Azure Container Registry.
 
+Once you have your docker image running locally, we will 
 
-
-This lab is to deploy the same Application to Container Registry
 
 The Docker image can be built and ran locally to test - see here
 
