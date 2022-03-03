@@ -47,7 +47,7 @@ stages :
           backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
           backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
           backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
       - task: TerraformTaskV2@2
         displayName: 'validate'
         inputs:
@@ -58,7 +58,7 @@ stages :
     dependsOn: [validate]
     condition: succeeded('validate')
     jobs:
-      - job: terraform_plan
+      - job: terraform_plan_develop
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
@@ -74,7 +74,7 @@ stages :
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
@@ -82,13 +82,13 @@ stages :
             command: 'plan'
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
 
   - stage: apply
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-      - job: terraform_apply
+      - job: terraform_apply_develop
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
@@ -104,7 +104,7 @@ stages :
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
-            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
@@ -112,15 +112,22 @@ stages :
             command: 'plan'
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'apply'
           inputs:
             provider: 'azurerm'
             command: 'apply'
-            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
+            commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+
+  - stage: Build
+    displayName: Build and push stage
+    jobs:  
+    - job: Build
+      displayName: Build job
+      steps:
       - task: Docker@2
         displayName: Build and push an image to container registry
         inputs:
@@ -129,4 +136,3 @@ stages :
           dockerfile: ${{ variables.dockerfile }}
           containerRegistry: ${{ variables.containerRegistry }}
           tags: $(Build.BuildId)
- 
