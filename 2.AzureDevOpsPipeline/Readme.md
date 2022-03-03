@@ -15,16 +15,16 @@ To create an Azure repository click on repos and import the clone repo above. Th
 
 Once imported to Azure Devops repository, Select Repo and click on set up Build. 
 
-![](/Azure-Devops-Enviornment-Setup/images/build.png)
+![](/2.AzureDevOpsPipeline/images/build.png)
 
 Select Existing Azure Pipelines YAML file and find branch / path to the staging.yaml file
 
-![](/Azure-Devops-Enviornment-Setup/images/pipeline.png)
+![](/2.AzureDevOpsPipeline/images/pipeline.png)
 
 
 Rewview the YAML pipeline and click on run and save to start running the pipeline. 
 
-![](/Azure-Devops-Enviornment-Setup/images/startpipeline.png)
+![](/2.AzureDevOpsPipeline/images/startpipeline.png)
 
-![](/Azure-Devops-Enviornment-Setup/images/runningpipeline.png)
+![](/2.AzureDevOpsPipeline/images/runningpipeline.png)
 
