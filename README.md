@@ -53,9 +53,7 @@ Add Application Insights to Terraform
 
 - Update Pipeline to Deploy Application to AKS
 
-5.***CI/CD***
-
-- Deploy CI/CD pipeline- Pipeline Trigger for automatic pipeline runs and automated deployment of your AKS Application
+5.***CI/CD*** - Deploy CI/CD pipeline- Pipeline Trigger for automatic pipeline runs and automated deployment of your AKS Application
 
 6.***Testing Azure Resourses***
 
