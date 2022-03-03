@@ -7,19 +7,20 @@ pr: none
 
 variables:
   - name: backendServiceArm
-    value: 'azure-devops-journey-service-connection'
+    value: 'SP'
   - name: backendAzureRmResourceGroupName
     value: 'devops-journey-rg'
   - name: backendAzureRmStorageAccountName
-    value: 'devopsjourneyazuredevops'
+    value: 'devopsjourney'
   - name: backendAzureRmContainerName
     value: 'tfstate'
   - name: backendAzureRmKey
     value: 'terraform.tfstate'
   - name: environment
-    value: 'production'
+    value: 'production/production'
   - name: terraform_version
     value: '0.15.4'
+
   - name: repository
     value: 'devopsjourney'
   - name: dockerfile
