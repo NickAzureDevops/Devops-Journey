@@ -25,7 +25,7 @@ variables:
   - name: dockerfile
     value: '$(Build.SourcesDirectory)/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
-    value: 'devopsjourneyacr.azurecr.io'
+    value: 'devopsjourneyacr.azurecr1.io'
 
 stages :
   - stage: validate
