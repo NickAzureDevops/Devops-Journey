@@ -20,6 +20,12 @@ variables:
     value: 'staging/staging'
   - name: terraform_version
     value: '0.15.4'
+  - name: repository
+    value: 'devopsjourney'
+  - name: dockerfile
+    value: '$(Build.SourcesDirectory)/aspnet-core-dotnet-core/Dockerfile'
+  - name: containerRegistry
+    value: 'devopsjourneyacr.azurecr.io'
 
 stages :
   - stage: validate
@@ -115,3 +121,18 @@ stages :
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+
+  - stage: Build
+    displayName: Build and push stage
+    jobs:  
+    - job: Build
+      displayName: Build job
+      steps:
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          command: buildAndPush
+          repository: ${{ variables.repository }}
+          dockerfile: ${{ variables.dockerfile }}
+          containerRegistry: ${{ variables.containerRegistry }}
+          tags: $(Build.BuildId)
