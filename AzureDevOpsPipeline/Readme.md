@@ -7,15 +7,14 @@ In this step we will deploy all the resources required for Azure Devops and set 
 - Azure Kubernetes Service
 - Azure Log Analytics
 
-We will start by setting up the Azure Devops Pipeline. First, fork a copy of the pipeline and terraform code here and clone it to your Aure Devops repo. [Pipelines]](https://github.com/nicholaschangIT/Devops-Journey/tree/main/AzureDevOpsPipeline)
+Install the Terraform extension/task [here]](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks) to your Azure DevOps organisation
 
-To create an Azure repository click on repos and
+Start by setting up the Azure Devops Pipeline. First, fork a copy of the pipeline and terraform code here and clone it to your Aure Devops repo. [Pipelines]](https://github.com/nicholaschangIT/Devops-Journey/tree/main/AzureDevOpsPipeline)
 
+To create an Azure repository click on repos and import the clone repo above. This respository will store all the codoe for the azure envionrnment. In this lab, there wil be two pipeline one for staging and another for production. 
 
-Create Azure repository - select Repos & you will see various options to setup a respository (This repository will store code throughout further labs also, please note this!)
+Once imported to Azure Devops repository, Select Repo and click on set up Build. 
 
-Copy contents from this folder into the newly created Azure DevOps repository
+Select Existing Azure Pipelines YAML file and find branch / path to the staging.yaml file
 
-Once copied to Azure DevOps repository, Select Repo -> Setup Build
-
-Select Existing Azure Pipelines YAML file and branch / path to the .yaml Azure DevOps Pipeline
+Select Save and run to start running the pipeline. 
