@@ -24,7 +24,7 @@ docker run -tid devopsjourneyapp
 
 You can confirm it is running by running docker container ls as shown below too. 
 
-![](/Deploy-To-ACR/images//images/dockerrunning.png)
+![](/Deploy-To-ACR/images/images/dockerrunning.png)
 
 t stands for a TTY console
 i stands for interactive
