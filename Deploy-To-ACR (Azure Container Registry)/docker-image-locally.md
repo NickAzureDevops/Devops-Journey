@@ -5,6 +5,9 @@ We will start by building the docker image locally. This can be done by navigati
  
 ![](/Deploy-To-ACR (Azure Container Registry)/images/dockerimageprocess.png)
 
+
+![](/AzureDevOpsPipeline/images/build.png)
+
 ![](/Deploy-To-ACR (Azure Container Registry)/images/dockerimage.png)
 
 
