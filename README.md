@@ -46,8 +46,11 @@ This will create all of the Azure resources from the infrastructure in order to 
 
 4.***Deploy Application to Azure Kubernetes Cluster***
 
+3.1 [AKS-Setup](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS) This will the Azure Kubernetes Services in Azure. 
+
 - Add AKS ACR Role assignment- Terraform to add role assignment for AKS managed identity to access the deployed ACR
-Add Application Insights to Terraform
+
+- Add Application Insights to Terraform
 
 - Application Insights -  monitor the application once deployed
 
@@ -55,7 +58,7 @@ Add Application Insights to Terraform
 
 - Update Pipeline to Deploy Application to AKS
 
-5.***CI/CD*** - Deploy CI/CD pipeline- Pipeline Trigger for automatic pipeline runs and automated deployment of your AKS Application
+5.***CI/CD*** [Deploy-To-CICD](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-CICD)- Pipeline Trigger for automatic pipeline runs and automated deployment of your AKS Application
 
 6.***Testing Azure Resourses***
 

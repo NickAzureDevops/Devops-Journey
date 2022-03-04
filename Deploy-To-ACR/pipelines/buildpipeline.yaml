@@ -23,7 +23,7 @@ variables:
   - name: repository
     value: 'azuredevopsjourney'
   - name: dockerfile
-    value: '$(Build.SourcesDirectory)/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Dockerfile'
+    value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
     value: 'devopsjourneyacr.azurecr.io'
 
