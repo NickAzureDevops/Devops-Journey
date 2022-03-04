@@ -1,5 +1,5 @@
 {
-  "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj",
+  "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14402,53 +14402,53 @@
   "RootNamespace": "aspnet_core_dotnet_core",
   "Documents": [
     {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/Error.cshtml",
-      "TargetPath": "Pages\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/Index.cshtml",
-      "TargetPath": "Pages\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/_ViewStart.cshtml",
-      "TargetPath": "Pages\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/Shared/_CookieConsentPartial.cshtml",
-      "TargetPath": "Pages\\Shared\\_CookieConsentPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/Contact.cshtml",
-      "TargetPath": "Pages\\Contact.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/Shared/_Layout.cshtml",
-      "TargetPath": "Pages\\Shared\\_Layout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/Shared/_ValidationScriptsPartial.cshtml",
-      "TargetPath": "Pages\\Shared\\_ValidationScriptsPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/Privacy.cshtml",
-      "TargetPath": "Pages\\Privacy.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/_ViewImports.cshtml",
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/_ViewImports.cshtml",
       "TargetPath": "Pages\\_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR (Azure Container Registry)/aspnet-core-dotnet-core/Pages/About.cshtml",
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/Error.cshtml",
+      "TargetPath": "Pages\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/About.cshtml",
       "TargetPath": "Pages\\About.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/_ViewStart.cshtml",
+      "TargetPath": "Pages\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/Contact.cshtml",
+      "TargetPath": "Pages\\Contact.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/Index.cshtml",
+      "TargetPath": "Pages\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/Shared/_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/Shared/_CookieConsentPartial.cshtml",
+      "TargetPath": "Pages\\Shared\\_CookieConsentPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/Shared/_Layout.cshtml",
+      "TargetPath": "Pages\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/nicholaschang/Documents/GITREPOS/Azure/Devops Journey/Deploy-To-ACR/aspnet-core-dotnet-core/Pages/Privacy.cshtml",
+      "TargetPath": "Pages\\Privacy.cshtml",
       "FileKind": "mvc"
     }
   ],
