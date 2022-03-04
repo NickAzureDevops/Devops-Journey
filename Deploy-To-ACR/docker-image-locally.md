@@ -1,4 +1,3 @@
-
 # Build the Docker Image Locally # 
 
 We will start by building the docker image locally. This can be done by navigating to the app directory and typing this command “build -t devopsjourneyapp.” to start building your image on your docker desktop.  The -t in the command is for tagging the name of the image and the . is telling docker it is in the current directory. 
