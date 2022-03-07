@@ -5,25 +5,26 @@ trigger: none
 # Don't run against PRs
 pr: none
 
+
 variables:
   - name: backendServiceArm
-   value: 'SP'
+    value: 'SP'
   - name: backendAzureRmResourceGroupName
     value: 'devops-journey-rg'
   - name: backendAzureRmStorageAccountName
-    value: 'devopsjourneyazuredevops'
+    value: 'devopsjourney'
   - name: backendAzureRmContainerName
     value: 'tfstate'
   - name: backendAzureRmKey
     value: 'terraform.tfstate'
   - name: environment
-    value: 'production'
+    value: 'staging/staging'
   - name: terraform_version
     value: '0.15.4'
   - name: repository
     value: 'aspnet'
   - name: dockerfile
-    value: '$(Build.SourcesDirectory)/aspnet-core-dotnet-core/Dockerfile'
+    value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
     value: 'devopsjourneyacr.azurecr.io'
   - group: devopsjourney
