@@ -6,6 +6,8 @@ This section will be deploying the an sample voting app to an AKS cluster. First
 
 Add the role assignment to AKS to pull the image. This can be done by adding the following command in your main.tf and provide the Acrpull permission.  
 
+'''
+
 resource "azurerm_role_assignment" "aks-acr-rg" {
   scope                = module.acr.resource_group_id
   role_definition_name = "Acrpull"
@@ -16,6 +18,8 @@ resource "azurerm_role_assignment" "aks-acr-rg" {
     module.acr
   ]
 }
+
+'''
 
 ***Deploy Application Insights using terraform***
 
