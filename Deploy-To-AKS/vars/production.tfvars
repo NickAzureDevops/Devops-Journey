@@ -26,6 +26,6 @@ application_type  = "web"
 
 # Key vault
 keyvault_name = "devopsjourney"
-access_policy_id  = "7da738c2-5c92-401c-87f1-eadbcf714367"
+access_policy_id  = "1d0318c3-a4c2-41d1-b218-aa33017759ab"
 
 environment = "production"
