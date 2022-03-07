@@ -55,7 +55,7 @@ module "acr" {
 #      module.aks
 #   ]
 # }
-
+//add permission to aks to pull the image 
 resource "azurerm_role_assignment" "aks-acr-rg" {
   scope                = module.acr.resource_group_id
   role_definition_name = "Acrpull"
