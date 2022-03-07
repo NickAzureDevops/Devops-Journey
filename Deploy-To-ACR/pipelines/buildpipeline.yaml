@@ -122,7 +122,7 @@ stages :
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
 
-- stage: Build
+ - stage: Build
     displayName: Build and push stage
     jobs:  
     - job: Build
