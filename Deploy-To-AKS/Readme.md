@@ -23,19 +23,21 @@ resource "azurerm_role_assignment" "aks-acr-rg" {
 
 ***Deploy Application Insights using terraform***
 
-- Add the application insight modules.  [AppInsight Module](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/terraform/modules/appinsights)
+- Add the application insight modules.  [Appinsight Module](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/terraform/modules/appinsights)
 
-- Update the main.tf with the changes - [AppInsight Module](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/terraform/modules/appinsights)
+- Update the main.tf with the changes - [main.tf](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/terraform/modules/appinsights)
 
 - Update variable.tf - [AppInsight Module](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/terraform/modules/appinsights)
 
 - add the following to the production.tfvars file. 
 
+```
 app_insights_name = "devopsjourney"
 application_type  = "web"
 
-***Deploy Azure Key Vault using Terraform***
+```
 
+***Deploy Azure Key Vault using Terraform***
 
 
 
