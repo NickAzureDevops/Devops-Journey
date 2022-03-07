@@ -63,3 +63,9 @@ module "appinsights" {
   environment      = var.environment
   application_type = var.application_type
 }
+
+module "keyvault" {
+  source           = "./modules/keyvault"
+  name             = var.keyvault_name
+  access_policy_id = var.access_policy_id
+}

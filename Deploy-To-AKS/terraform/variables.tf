@@ -83,3 +83,13 @@ variable "application_type" {
   type = string
   description = "Application Insights Type"
 }
+
+variable "keyvault_name" {
+  type = string
+  description = "Key Vault Name"
+}
+
+variable "access_policy_id" {
+  type = string
+  description = "Object ID for Key Vault Policy"
+}
