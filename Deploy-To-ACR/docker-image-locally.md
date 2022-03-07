@@ -10,7 +10,7 @@ We will start by building the docker image locally. This can be done by navigati
 ![](/Deploy-To-ACR/images/dockerimage.png)
 
 
-After the Docker image is created, run the following command to confirm the Docker image is on your machine. 
+After the Docker image has been created, run the following command to confirm the Docker image is on your machine. 
 
 docker image ls
 ![](/Deploy-To-ACR/images/dockerimagelocally.png)
