@@ -18,6 +18,7 @@ variable "network_address_space" {
   description = "Virtual Network Address Space"
 }
 
+
 variable "aks_subnet_address_prefix" {
   type        = string
   description = "AKS Subnet Address Prefix"
@@ -71,24 +72,4 @@ variable "environment" {
 variable "ssh_public_key" {
   type        = string
   description = "SSH key for AKS Cluster"
-}
-
-variable "app_insights_name" {
-  type = string
-  description = "Application Insights Name"
-}
-
-variable "application_type" {
-  type = string
-  description = "Application Insights Type"
-}
-
-variable "keyvault_name" {
-  type = string
-  description = "Key Vault Name"
-}
-
-variable "access_policy_id" {
-  type = string
-  description = "Object ID for Key Vault Policy"
 }
