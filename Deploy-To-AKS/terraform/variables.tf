@@ -73,3 +73,13 @@ variable "ssh_public_key" {
   type        = string
   description = "SSH key for AKS Cluster"
 }
+
+variable "app_insights_name" {
+  type = string
+  description = "Application Insights Name"
+}
+
+variable "application_type" {
+  type = string
+  description = "Application Insights Type"
+}

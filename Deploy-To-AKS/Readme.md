@@ -19,6 +19,9 @@ resource "azurerm_role_assignment" "aks-acr-rg" {
   ]
 }
 
+Make a copy of the previous lab called buildpipline.yaml and run pipeline so the change to Azure. [Deploy to ACR](https://github.com/nicholaschangIT/Devops-Journey/blob/main/Deploy-To-ACR/pipelines/buildpipeline.yaml) If you get an erorr please, ignore for now
+
+
 ```
 
 ***Deploy Application Insights using terraform***

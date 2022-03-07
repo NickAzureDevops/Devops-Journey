@@ -55,3 +55,11 @@ resource "azurerm_role_assignment" "aks-acr-rg" {
   ]
 }
 
+
+module "appinsights" {
+  source           = "./modules/appinsights"
+  name             = var.app_insights_name
+  location         = var.location
+  environment      = var.environment
+  application_type = var.application_type
+}
