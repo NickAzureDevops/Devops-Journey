@@ -20,8 +20,8 @@ variables:
     value: 'staging/staging'
   - name: terraform_version
     value: '0.15.4'
-  - name: repository
-   value: 'azurejourneydevops'
+ # - name: repository
+ #  value: 'azurejourneydevops'
   - name: dockerfile
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
