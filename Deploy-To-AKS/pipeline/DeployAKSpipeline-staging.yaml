@@ -123,7 +123,7 @@ stages :
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
- - stage: aks_deploy
+- stage: aks_deploy
     displayName: Deploy aspnet app to AKS
     jobs:  
     - job: Build
