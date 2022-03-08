@@ -16,7 +16,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: aspnetcore
-        image: azuredevopsjourneyacr.azurecr.io/aspnet:74
+        image: azurejourneydevopsacr.azurecr.io/aspnet:74
         resources:
           requests:
             cpu: 100m
