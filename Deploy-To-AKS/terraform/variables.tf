@@ -18,7 +18,6 @@ variable "network_address_space" {
   description = "Virtual Network Address Space"
 }
 
-
 variable "aks_subnet_address_prefix" {
   type        = string
   description = "AKS Subnet Address Prefix"
