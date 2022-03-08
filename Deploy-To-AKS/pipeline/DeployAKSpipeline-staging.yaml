@@ -17,7 +17,7 @@ variables:
   - name: backendAzureRmKey
     value: 'terraform.tfstate'
   - name: environment
-    value: 'staging/staging'
+    value: 'production/production'
   - name: terraform_version
     value: '0.15.4'
   - name: repository
@@ -25,7 +25,7 @@ variables:
   - name: dockerfile
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
-    value: 'devopsjourneyacr'
+    value: 'devopsjourneyacr.azurecr.io'
   - group: devopsjourney
 
 stages :
@@ -75,7 +75,7 @@ stages :
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
@@ -123,7 +123,7 @@ stages :
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
- - stage: Build
+  - stage: Build
     displayName: Build and push stage
     jobs:  
     - job: Build
