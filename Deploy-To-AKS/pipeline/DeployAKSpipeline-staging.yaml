@@ -75,7 +75,7 @@ stages :
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-          workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
