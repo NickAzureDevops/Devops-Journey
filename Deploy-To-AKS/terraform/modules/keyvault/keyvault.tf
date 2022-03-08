@@ -5,7 +5,7 @@ data "azurerm_resource_group" "keyvault" {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "keyvault" {
-  name                        = "${var.name}-kv"
+  name                        = "${var.name}-kvstaging"
   location                    = data.azurerm_resource_group.keyvault.location
   resource_group_name         = data.azurerm_resource_group.keyvault.name
   enabled_for_disk_encryption = true
