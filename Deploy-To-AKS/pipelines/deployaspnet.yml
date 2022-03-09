@@ -28,7 +28,7 @@ variables:
     value: 'devopsjourneyacr'
   - group: devopsjourney 
 
-- stage: Build
+  - stage: Build
     displayName: Build and push stage
     jobs:  
     - job: Build
@@ -66,4 +66,4 @@ variables:
             # Create secret
             kubectl -n default create secret generic aikey --from-literal=aisecret=$(AIKEY)
             # Apply app
-            kubectl apply -f /Deploy-To-AKS/pipelines/scripts/aspnet.yaml
+            kubectl apply -f /pipelines/scripts/aspnet.yaml
