@@ -70,7 +70,7 @@ stages :
           containerRegistry: ${{ variables.containerRegistry }}
           tags: $(Build.BuildId)
 
-  - stage: aks_deploy
+ - stage: aks_deploy
     displayName: Deploy aspnet app to AKS
     jobs:  
     - job: Build
@@ -84,7 +84,7 @@ stages :
           scriptLocation: inlineScript
           addSpnToEnvironment: true
           inlineScript: |
-            !/usr/bin/env bash
+            #!/usr/bin/env bash
             set -x
             AKS_RG="devopsjourneyaks-rg"
             AKS_NAME="devopsjourneyaks"
@@ -93,4 +93,4 @@ stages :
             # Create secret
             kubectl -n default create secret generic aikey --from-literal=aisecret=$(AIKEY)
             # Apply app
-            kubectl apply -f pipelines/scripts/aspnet.yaml
+            kubectl apply -f Deploy-To-AKS/pipelines/aspnet.yaml
