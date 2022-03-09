@@ -44,7 +44,7 @@ spec:
   selector:
     app: aspnetcore
 ---
-apiVersion: apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: aspnetcore
