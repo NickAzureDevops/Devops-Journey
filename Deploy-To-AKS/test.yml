@@ -12,8 +12,7 @@ spec:
       labels:
         app: azure-vote-back
     spec:
-      containers:
-      - name: azure-vote-back
+       - name: azure-vote-back
         image: redis
         resources:
           requests:
