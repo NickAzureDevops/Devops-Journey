@@ -138,7 +138,7 @@ stages :
           containerRegistry: ${{ variables.containerRegistry }}
           tags: $(Build.BuildId)
 
-- stage: aks_deploy
+  - stage: aks_deploy
     displayName: Deploy aspnet app to AKS
     jobs:  
     - job: Build
