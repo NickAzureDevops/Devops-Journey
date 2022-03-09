@@ -1,4 +1,3 @@
-apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: aspnetcore
@@ -33,7 +32,7 @@ spec:
               name: aikey
               key: aisecret
 ---
-apiVersion: v1
+apiVersion: apps/v1
 kind: Service
 metadata:
   name: aspnetcore
@@ -44,8 +43,8 @@ spec:
   selector:
     app: aspnetcore
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: aspnetcore
   annotations:
