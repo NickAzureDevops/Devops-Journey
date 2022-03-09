@@ -46,7 +46,7 @@ az extension add --name application-insights
 
 az monitor app-insights component show --app devopsjourney-rg -g devopsjourney-rg
 
-az keyvault secret set --vault-name "devopsjourney-kvtest" --name "AIKEY" --value e82abc81-f315-4900-80ba-76cbe5ed11ef
+az keyvault secret set --vault-name "devopsjourney-kvtest" --name "AIKEY" --value b5d2991b-45b3-4436-bc8c-05cb5626d3da
 
 ***Update Azure DevOps pipeline and Deploy sample application to AKS***
 
