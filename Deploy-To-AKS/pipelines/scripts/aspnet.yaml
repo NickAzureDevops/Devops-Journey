@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: aspnetcore
@@ -44,7 +44,7 @@ spec:
   selector:
     app: aspnetcore
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apiVersion: apps/v1
 kind: Ingress
 metadata:
   name: aspnetcore
