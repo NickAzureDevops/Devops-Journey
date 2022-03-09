@@ -28,7 +28,7 @@ variables:
     value: 'devopsjourneyacr'
   - group: devopsjourney
   - name: scripts
-    value: '$(Build.SourcesDirectory)/Deploy-To-AKS/pipelines/scrips/aspnet.yaml'
+    value: '$(Build.SourcesDirectory)/Deploy-To-AKS/pipelines/scripts/aspnet.yaml'
 
 
 stages :
