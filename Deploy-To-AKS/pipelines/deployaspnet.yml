@@ -26,9 +26,35 @@ variables:
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
     value: 'devopsjourneyacr'
-  - group: devopsjourney 
+  - group: devopsjourney
 
- stages :
+stages :
+  - stage: validate
+    jobs:
+    - job: validate
+      continueOnError: false
+      steps:
+      - task: TerraformInstaller@0
+        displayName: 'install'
+        inputs:
+          terraformVersion: ${{ variables.terraform_version}}
+      - task: TerraformTaskV2@2
+        displayName: 'init'
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: ${{ variables.backendServiceArm }}
+          backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+          backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+          backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+          backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+      - task: TerraformTaskV2@2
+        displayName: 'validate'
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+          
   - stage: Build
     displayName: Build and push stage
     jobs:  
