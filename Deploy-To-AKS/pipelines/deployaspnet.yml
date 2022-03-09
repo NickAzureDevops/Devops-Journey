@@ -28,6 +28,7 @@ variables:
     value: 'devopsjourneyacr'
   - group: devopsjourney 
 
+ stages :
   - stage: Build
     displayName: Build and push stage
     jobs:  
