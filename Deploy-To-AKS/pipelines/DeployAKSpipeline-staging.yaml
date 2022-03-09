@@ -27,7 +27,6 @@ variables:
   - name: containerRegistry
     value: 'devopsjourneyacr'
   - group: devopsjourney
-  - name: 
 
 stages :
   - stage: validate
