@@ -45,7 +45,7 @@ spec:
     app: aspnetcore
 ---
 apiVersion: v1
-kind: Ingress
+kind: Deployment
 metadata:
   name: aspnetcore
   annotations:
