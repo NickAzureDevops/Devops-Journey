@@ -1,10 +1,7 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
-trigger:
-  batch: true
-  branches:
-    include:
-      - main
+trigger: none
+
 # Don't run against PRs
 pr: none
 
@@ -29,7 +26,7 @@ variables:
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
     value: 'devopsjourneyacr'
- #  - group: devopsjourney
+# - group: devopsjourney
 
 stages :
   - stage: validate
@@ -88,7 +85,7 @@ stages :
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
-   - stage: apply
+  - stage: apply
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
