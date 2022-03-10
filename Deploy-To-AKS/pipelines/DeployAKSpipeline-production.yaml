@@ -2,6 +2,12 @@ name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
 trigger: none
 
+trigger:
+  batch: true 
+  branches:
+    include:
+      - main
+
 # Don't run against PRs
 pr: none
 
