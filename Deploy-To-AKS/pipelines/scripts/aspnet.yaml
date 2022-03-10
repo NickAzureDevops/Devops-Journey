@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: aspnetcore
-        image: docker pull azuredevopsjourneyacr.azurecr.io/aspnet:1279
+        image: azuredevopsjourneyacr.azurecr.io/aspnet:1279
         resources:
           requests:
             cpu: 100m
