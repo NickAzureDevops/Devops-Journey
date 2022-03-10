@@ -92,13 +92,18 @@ stages :
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-    - deployment: Terraform_Deploy
+    - deployment: apply
       continueOnError: false
       environment: 'approvalgates-production'
-      timeoutInMinutes: 400
+      timeoutInMinutes: 600
       strategy:
        runOnce:
         deploy:
+            steps:
+              - checkout: none
+              
+      - job: terraform_apply_develop
+        steps:
         - task: TerraformInstaller@0
           displayName: 'install'
           inputs:
