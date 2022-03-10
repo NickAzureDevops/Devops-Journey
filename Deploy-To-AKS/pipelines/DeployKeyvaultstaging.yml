@@ -122,7 +122,7 @@ stages :
             commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-            - stage: Build
+- stage: Build
     displayName: Build and push stage
     jobs:  
     - job: Build
