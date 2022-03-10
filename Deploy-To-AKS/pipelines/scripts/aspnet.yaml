@@ -25,7 +25,8 @@ spec:
             memory: 256Mi
         ports:
         - containerPort: 80
-      - name: APPINSIGHTS_INSTRUMENTATIONKEY
+       env:
+        - name: APPINSIGHTS_INSTRUMENTATIONKEY
           valueFrom:
             secretKeyRef:
               name: aikey
