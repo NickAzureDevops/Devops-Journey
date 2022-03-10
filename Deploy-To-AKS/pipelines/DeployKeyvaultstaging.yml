@@ -88,7 +88,7 @@ stages :
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
-  - stage: apply
+   - stage: apply
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
