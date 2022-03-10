@@ -92,7 +92,7 @@ stages :
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-  - deployment: apply
+    - deployment: apply
       continueOnError: false
       environment: 'approvalgates-production'
       timeoutInMinutes: 600
