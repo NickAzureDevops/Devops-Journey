@@ -12,6 +12,8 @@ spec:
       labels:
         app: aspnetcore
     spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
       containers:
       - name: aspnetcore
         image: azuredevopsjourneyacr.azurecr.io/aspnet:1279
