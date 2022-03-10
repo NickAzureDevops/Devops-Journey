@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,7 +24,7 @@ spec:
             memory: 256Mi
         ports:
         - containerPort: 80
-       env:
+        env:
         - name: APPINSIGHTS_INSTRUMENTATIONKEY
           valueFrom:
             secretKeyRef:
