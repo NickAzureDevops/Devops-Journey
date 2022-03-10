@@ -102,7 +102,6 @@ stages :
             steps:
               - checkout: none
   
-
         - task: TerraformInstaller@0
           displayName: 'install'
           inputs:
