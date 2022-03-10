@@ -99,9 +99,8 @@ stages :
       strategy:
        runOnce:
         deploy:
-            steps:
-              - checkout: none
-              
+        jobs:
+        steps:              
       - job: terraform_apply_develop
         steps:
         - task: TerraformInstaller@0
