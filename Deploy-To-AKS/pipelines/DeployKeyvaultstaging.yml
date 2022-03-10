@@ -88,17 +88,10 @@ stages :
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
-  - stage: apply
+   - stage: apply
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-    - deployment: Terraform_Deploy
-      continueOnError: false
-      environment: 'approvalgates-production'
-      timeoutInMinutes: 400
-      strategy:
-       runOnce:
-        deploy:
       - job: terraform_apply_develop
         steps:
         - task: TerraformInstaller@0
