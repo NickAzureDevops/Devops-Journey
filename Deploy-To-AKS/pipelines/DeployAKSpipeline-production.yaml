@@ -1,7 +1,10 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
-trigger: none
-
+trigger:
+  batch: true
+  branches:
+    include:
+      - main
 # Don't run against PRs
 pr: none
 
@@ -89,16 +92,15 @@ stages :
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-       - deployment: apply
+    - deployment: Terraform_Deploy
       continueOnError: false
       environment: 'approvalgates-production'
-      timeoutInMinutes: 120
+      timeoutInMinutes: 400
       strategy:
        runOnce:
         deploy:
-            steps:
-                - checkout: self
-
+      - job: terraform_apply_develop
+        steps:
         - task: TerraformInstaller@0
           displayName: 'install'
           inputs:
