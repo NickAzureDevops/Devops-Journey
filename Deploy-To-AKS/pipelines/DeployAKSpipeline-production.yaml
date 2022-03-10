@@ -96,6 +96,7 @@ stages :
       strategy:
        runOnce:
         deploy:
+      - job: terraform_apply_develop
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
