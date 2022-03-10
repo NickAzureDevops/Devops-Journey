@@ -99,7 +99,6 @@ stages :
       strategy:
        runOnce:
         deploy:
-        steps:
         - task: TerraformInstaller@0
           displayName: 'install'
           inputs:
