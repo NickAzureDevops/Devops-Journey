@@ -8,7 +8,6 @@ trigger:
 
 pr: none
 
-
 variables:
   - name: backendServiceArm
     value: 'SP'
@@ -96,7 +95,7 @@ stages :
     - deployment: apply
       continueOnError: false
       environment: 'approvalgates-production'
-      timeoutInMinutes: 600
+      timeoutInMinutes: 300
       strategy:
        runOnce:
         deploy:
