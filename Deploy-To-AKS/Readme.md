@@ -12,7 +12,7 @@ This section will be deploying a sample voting app to an AKS cluster. First, we 
 
 **Deploy Azure Key Vault using Terraform**
 
-- [Deploy KeyVault](/Deploy-To-AKS/Keyvault-creation.md)
+- [Deploy KeyVault](/Deploy-To-AKS/Keyvault-creation.md) - This will deploy a kayvault and a secret to  Azure
 
 
 **Publish application to Azure Kubernetes Services**
