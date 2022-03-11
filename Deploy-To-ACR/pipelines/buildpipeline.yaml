@@ -1,7 +1,7 @@
 trigger: none
 
 pool:
-  name: Default
+  vmImage: ubuntu-latest
 # Don't run against PRs
 pr: none
 
