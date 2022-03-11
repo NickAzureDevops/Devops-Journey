@@ -26,7 +26,7 @@ variable "access_policy_id" {
 }
 
 ```
-- Update the staging and production.tfvars found in the variable folder called vars. Please replace the objectID for your user in the access_police_id when you run the create-ad-group script found here [Create-ad-group]https://github.com/nicholaschangIT/Devops-Journey/blob/main/Azure-Devops-Enviornment-Setup/scripts/create-ad-group.sh 
+- Update the staging and production.tfvars found in the variable folder called vars. Please replace the objectID for your user in the access_police_id when you run the create-ad-group script found here [Create-ad-group](https://github.com/nicholaschangIT/Devops-Journey/blob/main/Azure-Devops-Enviornment-Setup/scripts/create-ad-group.sh)
 
 ```
 keyvault_name = "devopsjourney"
