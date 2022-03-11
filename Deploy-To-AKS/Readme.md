@@ -4,17 +4,17 @@ This section will be deploying a sample voting app to an AKS cluster. First, we 
 
 **Update terraform with AKS ACR role assignment**
 
-- [Add permission to AKS ACR](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/Update-terraform-AKS-ACR-permission.md)- This will add the nessessary permission to pull the image to the Azure Container Registry. 
+- [Add permission to AKS ACR](/Deploy-To-AKS/Update-terraform-AKS-ACR-permission.md)- This will add the nessessary permission to pull the image to the Azure Container Registry. 
 
 **Deploy Application Insights using Terraform**
 
--[Deploy Application Insights](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/Deploy-Appinsight.md)- Set up Application insights using terraform module 
+- [Deploy Application Insights](/Deploy-To-AKS/Deploy-Appinsight.md)- Set up Application insights using terraform module 
 
 **Deploy Azure Key Vault using Terraform**
 
--[Deploy KeyVault](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/Keyvault-creation.md)
+- [Deploy KeyVault](/Deploy-To-AKS/Keyvault-creation.md)
 
 
 **Publish application to Azure Kubernetes Services**
 
--[Deploy KeyVault](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/Update-terraform-AKS-ACR-permission.md) This will publish a sample ASPNET application to the Kerbernetes cluster. 
+- [Deploy KeyVault](/Deploy-To-AKS/Update-terraform-AKS-ACR-permission.md) This will publish a sample ASPNET application to the Kerbernetes cluster. 
