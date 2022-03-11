@@ -1,7 +1,6 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
-pool:
-  name: Default  
+pool: Default
 
 trigger:
   - none
