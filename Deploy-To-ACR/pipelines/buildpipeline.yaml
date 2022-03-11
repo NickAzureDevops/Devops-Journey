@@ -2,8 +2,8 @@ name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
 trigger: none
 
-pool: name: Default
-
+pool:
+  name: Default
 # Don't run against PRs
 pr: none
 
