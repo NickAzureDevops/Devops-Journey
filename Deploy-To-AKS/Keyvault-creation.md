@@ -36,7 +36,6 @@ access_policy_id  = "7da738c2-5c92-401c-87f1-eadbcf714367"
 
    
 
-
 After Azure key vault has been created run the below script to add a secret to it  
 
 - az extension add --name application-insights
