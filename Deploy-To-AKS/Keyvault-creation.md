@@ -63,4 +63,4 @@ When the above resources have been created, the next step is to create a variabl
 
 - Add a variable group called devopsjourney and tick the option "link secrets from an Azure key vault as variables". Once it has detected your key vault name and click add under variables to add your secret to it. 
 
-![](/Deploy-To-AKS/images/variablegroup.png)
+![](/Deploy-To-AKS/images/addkeyvaultsecrets.png)
