@@ -1,5 +1,3 @@
-name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
-
 trigger:
   - none
 
