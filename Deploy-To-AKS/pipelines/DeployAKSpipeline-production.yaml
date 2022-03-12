@@ -6,6 +6,9 @@ trigger:
     include:
       - main
 
+pool:
+  name: Default
+
 variables:
   - name: backendServiceArm
     value: 'SP'
