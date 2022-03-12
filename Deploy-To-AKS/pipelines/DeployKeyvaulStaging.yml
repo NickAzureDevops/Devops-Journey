@@ -1,5 +1,7 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
+trigger: none
+
 pool:
   name: Default
 
