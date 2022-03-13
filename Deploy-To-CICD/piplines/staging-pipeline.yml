@@ -141,7 +141,7 @@ stages :
           repository: ${{ variables.repository }}
           dockerfile: ${{ variables.dockerfile }}
           containerRegistry: ${{ variables.containerRegistry }}
-          tags: $(Build.BuildId)
+          tags: 'latest '
 
   - stage: aks_deploy
     displayName: Deploy aspnet app to AKS
