@@ -167,3 +167,4 @@ stages :
             kubectl -n default create secret generic aikey --from-literal=aisecret=$(AIKEY)
             # Apply app
             kubectl apply -f Deploy-To-CICD/pipelines/scripts/aspnet.yaml 
+            
