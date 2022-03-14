@@ -8,15 +8,14 @@ trigger:
 pool:
   name: Default
 
-
 resources:
   pipelines:
   - pipeline: CICD-production
     source: CICD-staging
     trigger: 
       branches:
-        include: 
-        - main/*
+        include:
+        - staging/*
 
 # Don't run against PRs
 pr: none
