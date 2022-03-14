@@ -33,7 +33,7 @@ variables:
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
     value: 'devopsjourneyacr'
-  - group: devopsjourney
+#  - group: devopsjourney
 
 stages :
   - stage: validate
