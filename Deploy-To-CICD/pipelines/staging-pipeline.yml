@@ -4,7 +4,7 @@ trigger:
   batch: true 
   branches:
     include:
-      - main
+      - staging
 pool:
   name: Default
 # Don't run against PRs
@@ -162,7 +162,7 @@ stages :
             AKS_RG="devopsjourneyaks-rg"
             AKS_NAME="devopsjourneyaks"
             # Get AKS Credentials
-            az aks get-credentials -g $AKS_RG -n $AKS_NAME --admin --overwrite-existing  
+            az aks get-credentials -g $AKS_RG -n $AKS_NAME --admin
             # Create secret
             kubectl -n default create secret generic aikey --from-literal=aisecret=$(AIKEY)
             # Apply app
