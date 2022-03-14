@@ -94,40 +94,50 @@ stages :
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-      - job: terraform_apply_develop
-        steps:
-        - task: TerraformInstaller@0
-          displayName: 'install'
-          inputs:
-            terraformVersion: ${{ variables.terraform_version}}
-        - task: TerraformTaskV2@2
-          displayName: 'init'
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            backendServiceArm: ${{ variables.backendServiceArm }}
-            backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
-            backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
-            backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-            backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-        - task: TerraformTaskV2@2
-          displayName: 'plan'
-          inputs:
-            provider: 'azurerm'
-            command: 'plan'
-            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
-            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-        - task: TerraformTaskV2@2
-          displayName: 'apply'
-          inputs:
-            provider: 'azurerm'
-            command: 'apply'
-            commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
-            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+    - deployment: apply
+      continueOnError: false
+      environment: 'approvalgates-production'
+      timeoutInMinutes: 600
+      strategy:
+       runOnce:
+        deploy:
+            steps:
+              - checkout: none  
 
+              - task: TerraformInstaller@0
+                displayName: 'install'
+                inputs:
+                  terraformVersion: ${{ variables.terraform_version}}
+
+              - task: TerraformTaskV2@2
+                displayName: 'init'
+                inputs:
+                  provider: 'azurerm'
+                  command: 'init'
+                  backendServiceArm: ${{ variables.backendServiceArm }}
+                  backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+                  backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+                  backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+                  backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+
+              - task: TerraformTaskV2@2
+                displayName: 'plan'
+                inputs:
+                  provider: 'azurerm'
+                  command: 'plan'
+                  commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
+                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+
+              - task: TerraformTaskV2@2
+                displayName: 'apply'
+                inputs:
+                  provider: 'azurerm'
+                  command: 'apply'
+                  commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
+                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
   - stage: Build
     displayName: Build and push stage
     jobs:  
@@ -162,7 +172,7 @@ stages :
             AKS_RG="devopsjourneyaks-rg"
             AKS_NAME="devopsjourneyaks"
             # Get AKS Credentials
-            az aks get-credentials -g $AKS_RG -n $AKS_NAME --admin
+            az aks get-credentials -g $AKS_RG -n $AKS_NAME --admin --overwrite-existing  
             # Create secret
             kubectl -n default create secret generic aikey --from-literal=aisecret=$(AIKEY)
             # Apply app
