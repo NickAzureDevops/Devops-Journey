@@ -1,5 +1,5 @@
 #log Analytics
-log_analytics_workspace_name = "devopsjourney"
+log_analytics_workspace_name = "devopsjourneytest"
 location                     = "uksouth"
 
 # Virtual Network
@@ -21,11 +21,11 @@ ssh_public_key     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDrt/GYkYpuQYRxM3lgjO
 acr_name = "azuredevopsjourney"
 
 # App Insights
-app_insights_name = "devopsjourney"
+app_insights_name = "devopsjourneytest"
 application_type  = "web"
 
 # Key vault
-keyvault_name = "devopsjourney"
+keyvault_name = "devopsjourneytest"
 access_policy_id  = "1d0318c3-a4c2-41d1-b218-aa33017759ab"
 
 environment = "staging"

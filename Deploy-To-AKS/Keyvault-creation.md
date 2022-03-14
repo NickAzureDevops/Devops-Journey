@@ -1,4 +1,3 @@
-
 **Deploy Key Vault using terraform**
 
 - Deploy Key vault using this module [KeyVault Module](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-AKS/terraform/modules/keyvault)
@@ -26,7 +25,7 @@ variable "access_policy_id" {
 }
 
 ```
-- Update the staging and production.tfvars found in the variable folder called vars. Please replace the objectID for your user in the access_police_id when you run the create-ad-group script found here [Create-ad-group](https://github.com/nicholaschangIT/Devops-Journey/blob/main/Azure-Devops-Enviornment-Setup/scripts/create-ad-group.sh)
+- Update the staging and production.tfvars found in the variable folder called vars. Please replace the objectID for your user in the access_police_id when you run the create-ad-group script found here [Create-ad-group]https://github.com/nicholaschangIT/Devops-Journey/blob/main/Azure-Devops-Enviornment-Setup/scripts/create-ad-group.sh)
 
 ```
 keyvault_name = "devopsjourney"
@@ -45,10 +44,9 @@ After Azure key vault has been created run the below script to add a secret to i
 
 - az extension add --name application-insights (This will install the application insights extension locally)
 
-- az monitor app-insights component show --app devopsjourney-rg -g devopsjourney-rg  (This command will give you details of your app insight and your Instrumentation Key which you will need for the next step)
+- az monitor app-insights component show --app devopsjourneytest-rg -g devopsjourneytest-rg   (This command will give you details of your app insight and your Instrumentation Key which you will need for the next step)
 
-- az keyvault secret set --vault-name "devopsjourney-kvtest" --name "AIKEY" --value 39eb55bd-acae-436f-9b83-822e82a46f59  (Replace the value by AIKEY to the Instrumentation Key)
-
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AIKEY" --value b05239e4-2cea-409f-abca-8cb65214b5f9 (Replace the value by AIKEY to the Instrumentation Key)
 
 ***Creating Variable Group***
 

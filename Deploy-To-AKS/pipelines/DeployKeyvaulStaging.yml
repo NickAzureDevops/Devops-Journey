@@ -1,12 +1,9 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
-trigger:
-  batch: true
-  branches:
-    include:
-      - main
-# Don't run against PRs
-pr: none
+trigger: none
+
+pool:
+  name: Default
 
 variables:
   - name: backendServiceArm
@@ -29,7 +26,7 @@ variables:
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
     value: 'devopsjourneyacr'
- #  - group: devopsjourney
+#  - group: devopsjourney
 
 stages :
   - stage: validate
@@ -92,13 +89,6 @@ stages :
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-    - deployment: Terraform_Deploy
-      continueOnError: false
-      environment: 'approvalgates-production'
-      timeoutInMinutes: 400
-      strategy:
-       runOnce:
-        deploy:
       - job: terraform_apply_develop
         steps:
         - task: TerraformInstaller@0
@@ -132,3 +122,18 @@ stages :
             commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+
+  - stage: Build
+    displayName: Build and push stage
+    jobs:  
+    - job: Build
+      displayName: Build job
+      steps:
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          command: buildAndPush
+          repository: ${{ variables.repository }}
+          dockerfile: ${{ variables.dockerfile }}
+          containerRegistry: ${{ variables.containerRegistry }}
+          tags: $(Build.BuildId)

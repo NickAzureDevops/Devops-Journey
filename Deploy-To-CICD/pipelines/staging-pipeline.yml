@@ -4,7 +4,9 @@ trigger:
   batch: true 
   branches:
     include:
-      - master
+      - staging
+pool:
+  name: Default
 # Don't run against PRs
 pr: none
 
@@ -139,7 +141,7 @@ stages :
           repository: ${{ variables.repository }}
           dockerfile: ${{ variables.dockerfile }}
           containerRegistry: ${{ variables.containerRegistry }}
-          tags: $(Build.BuildId)
+          tags: 'latest '
 
   - stage: aks_deploy
     displayName: Deploy aspnet app to AKS
@@ -164,4 +166,4 @@ stages :
             # Create secret
             kubectl -n default create secret generic aikey --from-literal=aisecret=$(AIKEY)
             # Apply app
-            kubectl apply -f Deploy-To-AKS/pipelines/scripts/aspnet.yaml 
+            kubectl apply -f Deploy-To-CICD/pipelines/scripts/aspnet.yaml

@@ -21,6 +21,7 @@ Run the DeployAKSpipeline-staging pipeline and once it has been successful you s
 ![](/Deploy-To-AKS/images/pipelinerun.png)
 
 
+![](/Deploy-To-AKS/images/kubernetescluster.png)
 
 
 ![](/Deploy-To-AKS/images/sampleapp.png)
