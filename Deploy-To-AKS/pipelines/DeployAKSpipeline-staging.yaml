@@ -97,6 +97,7 @@ stages :
           displayName: 'install'
           inputs:
             terraformVersion: ${{ variables.terraform_version}}
+
         - task: TerraformTaskV2@2
           displayName: 'init'
           inputs:
@@ -108,6 +109,7 @@ stages :
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
@@ -116,6 +118,7 @@ stages :
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+            
         - task: TerraformTaskV2@2
           displayName: 'apply'
           inputs:
