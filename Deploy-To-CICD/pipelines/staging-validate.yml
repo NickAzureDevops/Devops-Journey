@@ -139,4 +139,4 @@ stages :
                   command: 'apply'
                   commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
                   environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-                  workingDirectory: $(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
