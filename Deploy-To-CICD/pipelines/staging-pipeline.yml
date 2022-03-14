@@ -16,7 +16,7 @@ resources:
       branches:
         include:
         - main/*
-
+        
 # Don't run against PRs
 pr: none
 
