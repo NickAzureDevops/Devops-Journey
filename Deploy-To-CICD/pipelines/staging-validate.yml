@@ -8,6 +8,7 @@ trigger:
       
 pool:
   name: Default
+
 # Don't run against PRs
 pr: none
 
@@ -32,7 +33,7 @@ variables:
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
     value: 'devopsjourneyacr'
-  - group: devopsjourney
+#  - group: devopsjourney
 
 stages :
   - stage: validate
@@ -119,7 +120,7 @@ stages :
                   backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
                   backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
                   backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-                  backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
+                  backendAzureRmKey: ${{ variables.backendAzureRmKey }}
                   workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
               - task: TerraformTaskV2@2
@@ -129,13 +130,13 @@ stages :
                   command: 'plan'
                   commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
                   environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-                  workingDirectory: $(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
               - task: TerraformTaskV2@2
                 displayName: 'apply'
                 inputs:
                   provider: 'azurerm'
                   command: 'apply'
-                  commandOptions: -input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
-                  environmentServiceNameAzureRM:  ${{ variables.backendServiceArm }}
+                  commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
+                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
                   workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
