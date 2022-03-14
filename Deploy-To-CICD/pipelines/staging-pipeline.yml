@@ -7,6 +7,17 @@ trigger:
       - staging
 pool:
   name: Default
+
+
+resources:
+  pipelines:
+  - pipeline: CICD-production
+    source: CICD-staging
+    trigger: 
+      branches:
+        include: 
+        - main/*
+
 # Don't run against PRs
 pr: none
 
