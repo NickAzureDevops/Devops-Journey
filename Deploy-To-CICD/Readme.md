@@ -22,8 +22,3 @@ trigger:
 ```
 
 ### Automated deployment of your AKS Application ###
-
-
-
-
-
