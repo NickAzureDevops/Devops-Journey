@@ -150,7 +150,7 @@ stages :
           - task: UseRubyVersion@0
             displayName: 'Install Ruby'
             inputs:
-              versionSpec: '>= 2.5'
+              versionSpec: '>= 2.4'
               addToPath: true
 
           - script: gem install inspec-bin
