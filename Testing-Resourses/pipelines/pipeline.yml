@@ -162,7 +162,7 @@ stages :
                 export AZURE_CLIENT_ID="$(AZURECLIENTID)"
                 export AZURE_CLIENT_SECRET="$(AZURECLIENTSECRET)"
                 export AZURE_TENANT_ID="$(AZURETENANTID)"
-                inspec exec /Testing-Resourses/azure-inspec-tests/ -t azure:// --chef-license=accept --reporter cli junit:inspectestresults.xml
+                inspec exec ./Testing-Resourses/azure-inspec-tests/ -t azure:// --chef-license=accept --reporter cli junit:inspectestresults.xml
           - task: PublishTestResults@2
             displayName: Publish inspec test results
             condition: succeededOrFailed()
