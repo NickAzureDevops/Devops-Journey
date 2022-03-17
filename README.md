@@ -60,13 +60,13 @@ This will create all of the Azure resources from the infrastructure in order to 
 
 5.***CI/CD*** [Deploy-To-CICD](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Deploy-To-CICD)- Pipeline Trigger for automatic pipeline runs and automated deployment of your AKS Application
 
-6.***Testing Azure Resourses***
+6.***Testing Azure Resourses*** [Testing](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Testing-Resourses)
 
 - Inspec Testing using Azure DevOps Pipeline
 - Run Inspec-Tests using Azure DevOps
 - View Inspec reports in Azure DevOps
 
-7.***Monitoring and Alerting***
+7.***Monitoring and Alerting*** [Montioring](https://github.com/nicholaschangIT/Devops-Journey/tree/main Monitoring-and-Alerting)
 
 - Using Application Insights to view telemetry data!
 - Configure availability test using Application Insights

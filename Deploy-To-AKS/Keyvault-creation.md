@@ -46,7 +46,7 @@ After Azure key vault has been created run the below script to add a secret to i
 
 - az monitor app-insights component show --app devopsjourneytest-rg -g devopsjourneytest-rg   (This command will give you details of your app insight and your Instrumentation Key which you will need for the next step)
 
-- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AIKEY" --value de210fe1-23dc-4d7e-be8e-c7d0642a6202 (Replace the value by AIKEY to the Instrumentation Key)
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AIKEY" --value 0719384d-a79c-41b0-b153-192710326ff0 (Replace the value by AIKEY to the Instrumentation Key)
 
 ***Creating Variable Group***
 
@@ -62,3 +62,5 @@ When the above resources have been created, the next step is to create a variabl
 - Add a variable group called devopsjourney and tick the option "link secrets from an Azure key vault as variables". Once it has detected your key vault name and click add under variables to add your secret to it. 
 
 ![](/Deploy-To-AKS/images/addkeyvaultsecrets.png)
+
+
