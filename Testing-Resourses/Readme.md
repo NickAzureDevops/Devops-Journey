@@ -90,3 +90,5 @@ Run the following command to update the key vault.
 - az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTID" --value "AZURETENANTID"
 
 
+
+![](/Testing-Resourses/images/inspec-running1.png)
