@@ -1,9 +1,22 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
-trigger: none
+trigger:
+  batch: true 
+  branches:
+    include:
+      - main
       
 pool:
   name: Default
+
+resources:
+  pipelines:
+  - pipeline: CICD-production
+    source: CICD-production-validate
+    trigger: 
+      branches:
+        include:
+        - main/*
 
 # Don't run against PRs
 pr: none
