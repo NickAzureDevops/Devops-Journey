@@ -10,7 +10,7 @@ pool:
 
 resources:
   pipelines:
-  - pipeline: CICD-production
+  - pipeline: CICD-production-validate
     source: CICD-staging
     trigger: 
       branches:
