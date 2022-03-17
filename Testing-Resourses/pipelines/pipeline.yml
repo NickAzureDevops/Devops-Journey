@@ -2,6 +2,9 @@ name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
 trigger: none
       
+pool:
+  name: Default
+
 # Don't run against PRs
 pr: none
 
@@ -147,7 +150,7 @@ stages :
           - task: UseRubyVersion@0
             displayName: 'Install Ruby'
             inputs:
-              versionSpec: '>= 2.4'
+              versionSpec: '>= 2.5'
               addToPath: true
 
           - script: gem install inspec-bin
