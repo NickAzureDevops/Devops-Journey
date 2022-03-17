@@ -81,12 +81,17 @@ In the previous section, we have successfully run tests locally. Now, we will de
 
 Run the following command to update the key vault. 
 
-- az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTID" --value "VALUE"
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURECLIENTID" --value "8a4fd599-8cd5-4c9b-ad39-e96dee2ddfca"
 
-- az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTSECRET" --value "AZURE_CLIENT_ID_VALUE"
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURECLIENTSECRET" --value "1-K7Q~K4.-8i.Bn.DUcyGJCUX5CdW37Oxh7cs"
 
-- az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURESUBSCRIPTIONID" --value "AZURE_CLIENT_ID_VALUE"
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURESUBSCRIPTIONID" --value "8a4fd599-8cd5-4c9b-ad39-e96dee2ddfca"
 
-- az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTID" --value "AZURETENANTID"
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURETENANTID" --value "85c4cc12-7b58-4cd2-84c4-c7b9698d8670"
+
+az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTID" --value "VALUE" 
+az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTSECRET" --value "AZURE_CLIENT_ID_VALUE" 
+az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURESUBSCRIPTIONID" --value "AZURE_CLIENT_ID_VALUE" 
+az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTID" --value "AZURETENANTID"
 
 
