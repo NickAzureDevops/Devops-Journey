@@ -1,4 +1,4 @@
-v_name = 'devopsjourneytest-kvtest'
+kv_name = 'devopsjourneytest-kvtest'
 kv_secret_name = 'AIKEY'
 rg_name = 'devopsjourneytest-rg'
 

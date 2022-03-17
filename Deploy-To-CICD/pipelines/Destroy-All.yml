@@ -1,10 +1,9 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
 trigger: none
-      
+
 pool:
   name: Default
-
 # Don't run against PRs
 pr: none
 
@@ -22,9 +21,9 @@ variables:
   - name: environment
     value: 'staging/staging'
   - name: terraform_version
-    value:  '=0.15.4'
-  - name: repository
-    value: 'aspnet'
+    value: '0.15.4'
+# - name: repository
+#   value: 'aspnet'
   - name: dockerfile
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
@@ -58,11 +57,11 @@ stages :
           provider: 'azurerm'
           command: 'validate'
           
-  - stage: plan
+  - stage: destroy
     dependsOn: [validate]
     condition: succeeded('validate')
     jobs:
-      - job: terraform_plan_develop
+      - job: terraform_destroy
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
@@ -77,62 +76,13 @@ stages :
             backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-            backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+            backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
         - task: TerraformTaskV2@2
-          displayName: 'plan'
+          displayName: 'destroy'
           inputs:
             provider: 'azurerm'
-            command: 'plan'
+            command: 'destroy'
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-
-  - stage: apply
-    dependsOn: [plan]
-    condition: succeeded('plan')
-    jobs:
-    - deployment: apply
-      continueOnError: false
-      environment: 'approvalgates-production'
-      timeoutInMinutes: 600
-      strategy:
-       runOnce:
-        deploy:
-            steps:
-              - checkout: none  
-
-              - task: TerraformInstaller@0
-                displayName: 'install'
-                inputs:
-                  terraformVersion: ${{ variables.terraform_version}}
-
-              - task: TerraformTaskV2@2
-                displayName: 'init'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'init'
-                  backendServiceArm: ${{ variables.backendServiceArm }}
-                  backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
-                  backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
-                  backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-                  backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-
-              - task: TerraformTaskV2@2
-                displayName: 'plan'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'plan'
-                  commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
-                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-
-              - task: TerraformTaskV2@2
-                displayName: 'apply'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'apply'
-                  commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
-                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
