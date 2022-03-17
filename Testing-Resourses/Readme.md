@@ -1,4 +1,3 @@
-
 # Testing infrastructure #
 
 At this stage, we will be looking at testing the resources for the infrastructure. 
@@ -22,7 +21,14 @@ Inspec-Azure works by comparing the actual state of your Azure resources with th
 
 1)  Install Inspec from here https://www.inspec.io/downloads/
 
-2)  Set up Service Principle with Contributor/Reader access here https://github.com/inspec/inspec-azure
+2)  Set up Service Principle with Contributor/Reader access here 
+
+```
+az ad sp create-for-rbac --name myServicePrincipalName \
+                         --role reader \
+                         --scopes /subscriptions/mySubscriptionID/
+
+```
 
 3)  Set up Environment Variables to connect to the Service Principle. This can be done by using the PowerShell command: 
 
@@ -61,7 +67,26 @@ As you can see when the test is run the result shows you what is wrong. In this 
 
 ![](/Testing-Resourses/images/inspec-running2.png)
 
-
 ## Integration with  Azure DevOps## 
+
+In the previous section, we have successfully run tests locally. Now, we will deploy it via Azure DevOps. By running it in a pipeline, it can easily alert issues to others in your project. We will be looking at how to validate the test of what is expected to be deployed to the actual resources. 
+
+- Before running Inspec in the pipeline, you will need to get the information from the Service Principle created previously. 
+
+- Azure Subscription ID 
+- Azure Client ID 
+- Azure Client Secret 
+- Azure Tenant ID
+
+
+Run the following command to update the key vault. 
+
+- az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTID" --value "VALUE"
+
+- az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTSECRET" --value "AZURE_CLIENT_ID_VALUE"
+
+- az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURESUBSCRIPTIONID" --value "AZURE_CLIENT_ID_VALUE"
+
+- az keyvault secret set --vault-name "devopsjourney-kv" --name "AZURECLIENTID" --value "AZURETENANTID"
 
 
