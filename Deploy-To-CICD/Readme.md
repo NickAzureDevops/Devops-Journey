@@ -78,6 +78,3 @@ kubectl describe pod aspnetcore | grep Image Image: azuredevopsjourneyacr.azurec
 
 ![](/Deploy-To-CICD/images/updatedimage1.png
 
-
-
-

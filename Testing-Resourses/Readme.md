@@ -46,7 +46,8 @@ Please ensure the Service Principle is added to the key vault using the access p
 
 inspect init profile --platform azure azure-Inspec-tests. 
 
-I have created it using a Mac, if you use Windows you might get a different location. You will get something similar to![this](/Testing-Resourses/Readme.md)
+I have created it using a Mac, if you use Windows you might get a different location. You will get something similar to   
+![this](/Testing-Resourses/Readme.md) 
 
 
 ![](/Testing-Resourses/images/Inspec-profile.png)
