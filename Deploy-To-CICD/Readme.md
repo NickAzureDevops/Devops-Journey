@@ -21,6 +21,18 @@ trigger:
 
 ```
 
+### Adding Build Artifacts with Azure Devops ###
+
+## What is Azure Artifacts ? ##
+
+
+
+
+## Why used Build Artifacts ? ##
+
+
+
+
 ### Automated deployment of your AKS Application ###
 
 This stage will be automating the deployment of the AKS application once the pipeline has been triggered using the manual tag of the image. Every time you update the pods on the AKS cluster, you would need to delete the deployment and re-run the pipeline. We can do this by changing the following code 
@@ -78,3 +90,7 @@ kubectl describe pod aspnetcore | grep Image Image: azuredevopsjourneyacr.azurec
 
 ![](/Deploy-To-CICD/images/updatedimage1.png
 
+
+
+
+Tips (Please order the pipeline in order of the labs)

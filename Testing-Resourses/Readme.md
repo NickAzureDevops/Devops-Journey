@@ -47,8 +47,7 @@ Please ensure the Service Principle is added to the key vault using the access p
 inspect init profile --platform azure azure-Inspec-tests. 
 
 I have created it using a Mac, if you use Windows you might get a different location. You will get something similar to   
-![this](/Testing-Resourses/Readme.md) 
-
+[this](/Testing-Resourses/Readme.md)
 
 ![](/Testing-Resourses/images/Inspec-profile.png)
 
@@ -86,13 +85,13 @@ In the previous section, we have successfully run tests locally. Now, we will de
 
 3) Run the following command to update the key vault. 
 
-- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURECLIENTID" --value "8a4fd599-8cd5-4c9b-ad39-e96dee2ddfca"
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURECLIENTID" --value "AZURECLIENTID"
 
-- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURECLIENTSECRET" --value "1-K7Q~K4.-8i.Bn.DUcyGJCUX5CdW37Oxh7cs"
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURECLIENTSECRET" --value "AZURECLIENTSECRET"
 
-- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURESUBSCRIPTIONID" --value "f55aba78-6a4c-4da4-84be-d4037def0d50"
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURESUBSCRIPTIONID" --value "AZURESUBSCRIPTIONID"
 
-- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURETENANTID" --value "85c4cc12-7b58-4cd2-84c4-c7b9698d8670"
+- az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURETENANTID" --value "AZURETENANTID"
 
 ![](/Testing-Resourses/images/Keyvaultvalues.png)
 

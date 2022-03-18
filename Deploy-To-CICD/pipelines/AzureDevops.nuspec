@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>AzureDevops</id>
+        <version>$VERSIONHERE$</version>
+        <authors>Nicholas Chang</authors>
+        <description>My Devops Journey module</description>
+    </metadata>
+</package>
