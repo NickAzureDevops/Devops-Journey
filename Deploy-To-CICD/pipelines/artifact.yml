@@ -12,9 +12,6 @@ variables:
   patch: $(Build.BuildID)
   buildVer: $(major).$(minor).$(Build.BuildID)
 
-pool:
-  vmImage: "ubuntu-latest"
-
 stages:
 - stage: Build
   jobs:
