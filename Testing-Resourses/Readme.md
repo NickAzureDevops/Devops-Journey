@@ -40,7 +40,7 @@ $env:AZURE_TENANT_ID="<tenant id>"
 
 ```
 
-Please ensure the Service Principle is added to the keyvault using the access policy. 
+Please ensure the Service Principle is added to the key vault using the access policy. 
 
 4) Create an Inspec profile in the Testing-Resources directory 
 
@@ -61,7 +61,7 @@ I have created it using a Mac, if you use Windows you might get a different loca
 
 6) Run inspec locally by running "inspec exec azure-inspec-tests -t azure://" Please make sure your same directory as the Inspec profile. 
 
-As you can see when the test is run the result shows you what is wrong. In this example, test of the subnet should be “aks,appgw”, but it was set the opposite. Change these in the file and the test should run successful. 
+As you can see when the test is run the result shows you what is wrong. In this example, the test of the subnet should be “aks,appgw”, but it was set the opposite. Change these in the file and the test should run successfully. 
 
 ![](/Testing-Resourses/images/inspec-running1.png)
 
@@ -71,15 +71,19 @@ As you can see when the test is run the result shows you what is wrong. In this 
 
 In the previous section, we have successfully run tests locally. Now, we will deploy it via Azure DevOps. By running it in a pipeline, it can easily alert issues to others in your project. We will be looking at how to validate the test of what is expected to be deployed to the actual resources. 
 
-- Before running Inspec in the pipeline, you will need to get the information from the Service Principle created previously. 
+1) Before running Inspec in the pipeline, you will need to get the information from the Service Principle created previously. 
 
 - Azure Subscription ID 
 - Azure Client ID 
 - Azure Client Secret 
 - Azure Tenant ID
 
+2) Note down the Client Secret from the key vault acquired above or in the Azure portal in the Service Principle created under the client’s secrets section 
 
-Run the following command to update the key vault. 
+![](/Testing-Resourses/images/clientsecrets.png)
+
+
+3) Run the following command to update the key vault. 
 
 - az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURECLIENTID" --value "8a4fd599-8cd5-4c9b-ad39-e96dee2ddfca"
 
@@ -89,9 +93,23 @@ Run the following command to update the key vault.
 
 - az keyvault secret set --vault-name "devopsjourneytest-kvtest" --name "AZURETENANTID" --value "85c4cc12-7b58-4cd2-84c4-c7b9698d8670"
 
-## Running Pipeline ## 
+![](/Testing-Resourses/images/Keyvaultvalues.png)
+
+![](/Testing-Resourses/images/variablegroup.png)
 
 
-![](/Testing-Resourses/images/inspec-running1.png)
 
+3) Add inspec_tests stage to your DevOps Pipeline [pipeline](/Testing-Resourses/pipelines/pipeline.yml)
+
+
+4) Run the pipeline and once it is successful you should see the below. 
+
+![](/Testing-Resourses/images/pipelinerunning.png)
+
+
+Testing Results 
+
+![](/Testing-Resourses/images/Testingresults.png)
+
+![](/Testing-Resourses/images/Testingresult1.png)
 
