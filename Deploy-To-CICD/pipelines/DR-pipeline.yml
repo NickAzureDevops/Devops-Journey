@@ -7,7 +7,7 @@ trigger: none
 resources:
   pipelines:
     - pipeline: DR-pipeline 
-      source: production-pipeline  
+      source: CICD-production  
       trigger:
         branches:
           include:
