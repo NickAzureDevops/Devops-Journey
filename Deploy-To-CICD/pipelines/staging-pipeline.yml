@@ -8,7 +8,7 @@ trigger:
   branches:
     include:
       - staging
-      
+
 resources:
   pipelines:
   - pipeline: CICD-staging
