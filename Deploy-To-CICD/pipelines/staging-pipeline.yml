@@ -1,13 +1,14 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
+pool:
+  name: Default
+
 trigger:
   batch: true 
   branches:
     include:
       - staging
-pool:
-  name: Default
-
+      
 resources:
   pipelines:
   - pipeline: CICD-staging
