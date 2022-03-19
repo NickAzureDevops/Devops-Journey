@@ -15,7 +15,7 @@ resources:
     trigger: 
       branches:
         include:
-        - main
+        - staging
 
 # Don't run against PRs
 pr: none

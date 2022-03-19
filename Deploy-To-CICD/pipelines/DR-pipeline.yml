@@ -1,7 +1,4 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
-
-variables:
-  - group: terraform-develop
   
 pool:
   vmImage: ubuntu-latest
@@ -9,13 +6,12 @@ pool:
 trigger: none 
 resources:
   pipelines:
-    - pipeline: none
+    - pipeline: DR-pipeline 
       source: production-pipeline  
       trigger:
         branches:
           include:
             - main       
-
 
 # Don't run against PRs
 pr: none
