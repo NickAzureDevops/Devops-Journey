@@ -130,5 +130,4 @@ Tips (Please order the pipeline in order of the labs)
 - staging pipeline.yml 
 - staging validate.yml
 - production-Validate.yml
-- DR-pipeline.yml 
 - production.yml 
