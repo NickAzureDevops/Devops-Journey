@@ -17,6 +17,5 @@ This will cover using applications insights to track and montior the deployment 
 - Open Application insihts that was created in the Azure portal and click on live metrics. Please make sure you have the 
 
 
-
-
 ## Setup an Application Insights Availability test ##
+
