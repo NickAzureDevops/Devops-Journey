@@ -19,7 +19,7 @@ stages:
     steps:
     - task: PowerShell@2
       inputs:
-        filePath: '$(System.DefaultWorkingDirectory)/build_scripts/build.ps1'
+        filePath: '$(System.DefaultWorkingDirectory)/Deploy-To-CICD/build_scripts/build.ps1'
     - task: NuGetCommand@2
       inputs:
         command: 'pack'
@@ -39,13 +39,13 @@ stages:
     - task: Pester@0
       inputs:
         scriptFolder: "@{Path='$(System.DefaultWorkingDirectory)/PowerShellModuleProject.Tests.ps1'}"
-        resultsFile: "$(System.DefaultWorkingDirectory)/PowerShellModuleProject.Tests.XML"
+        resultsFile: "$(System.DefaultWorkingDirectory)/Deploy-To-CICD/PowerShellModuleProject.Tests.XML"
         usePSCore: true
         run32Bit: False
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: "NUnit"
-        testResultsFiles: "$(System.DefaultWorkingDirectory)/PowerShellModuleProject.Tests.XML"
+        testResultsFiles: "$(System.DefaultWorkingDirectory)/Deploy-To-CICD/AzureDevops.Tests.XML"
         failTaskOnFailedTests: true
 - stage: Deploy
   jobs:
