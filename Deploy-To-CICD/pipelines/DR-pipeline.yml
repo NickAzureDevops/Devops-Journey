@@ -6,12 +6,12 @@ pool:
 trigger: none 
 resources:
   pipelines:
-    - pipeline: DR-pipeline 
-      source: production-pipeline  
+    - pipeline: DR 
+      source: CICD-production
       trigger:
         branches:
           include:
-            - main       
+            - main        
 
 # Don't run against PRs
 pr: none
