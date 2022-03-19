@@ -98,7 +98,6 @@ In the previous section, we have successfully run tests locally. Now, we will de
 ![](/Testing-Resourses/images/variablegroup.png)
 
 
-
 3) Add inspec_tests stage to your DevOps Pipeline [pipeline](/Testing-Resourses/pipelines/pipeline.yml)
 
 

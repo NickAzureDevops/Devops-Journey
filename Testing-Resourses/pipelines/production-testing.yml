@@ -1,13 +1,10 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
-trigger:
-  batch: true 
-  branches:
-    include:
-      - main
+trigger: none
 
 pool:
   name: Default
+
 # Don't run against PRs
 pr: none
 
@@ -95,50 +92,39 @@ stages :
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-    - deployment: apply
-      continueOnError: false
-      environment: 'approvalgates-production'
-      timeoutInMinutes: 600
-      strategy:
-       runOnce:
-        deploy:
-            steps:
-              - checkout: none  
-
-              - task: TerraformInstaller@0
-                displayName: 'install'
-                inputs:
-                  terraformVersion: ${{ variables.terraform_version}}
-
-              - task: TerraformTaskV2@2
-                displayName: 'init'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'init'
-                  backendServiceArm: ${{ variables.backendServiceArm }}
-                  backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
-                  backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
-                  backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-                  backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-
-              - task: TerraformTaskV2@2
-                displayName: 'plan'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'plan'
-                  commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
-                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-
-              - task: TerraformTaskV2@2
-                displayName: 'apply'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'apply'
-                  commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
-                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+      - job: terraform_apply
+        steps:
+        - task: TerraformInstaller@0
+          displayName: 'install'
+          inputs:
+            terraformVersion: ${{ variables.terraform_version}}
+        - task: TerraformTaskV2@2
+          displayName: 'init'
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: ${{ variables.backendServiceArm }}
+            backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+            backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+            backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+            backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+        - task: TerraformTaskV2@2
+          displayName: 'plan'
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
+            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+        - task: TerraformTaskV2@2
+          displayName: 'apply'
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
+            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
   - stage: Build
     displayName: Build and push stage
@@ -153,7 +139,39 @@ stages :
           repository: ${{ variables.repository }}
           dockerfile: ${{ variables.dockerfile }}
           containerRegistry: ${{ variables.containerRegistry }}
-          tags: $(Build.BuildId)
+          tags: 'latest '
+
+
+  - stage: inspec_tests
+    displayName: Inspec Testing
+    jobs:
+      - job: "Checkout"
+        steps:
+          - task: UseRubyVersion@0
+            displayName: 'Install Ruby'
+            inputs:
+              versionSpec: '>= 2.4'
+              addToPath: true
+
+          - script: gem install inspec-bin
+            displayName: 'Install inspec-bin'
+
+          - task: Bash@3
+            displayName: 'Run inspec tests'
+            inputs:
+              targetType: inline
+              script: |
+                export AZURE_SUBSCRIPTION_ID="$(AZURESUBSCRIPTIONID)"
+                export AZURE_CLIENT_ID="$(AZURECLIENTID)"
+                export AZURE_CLIENT_SECRET="$(AZURECLIENTSECRET)"
+                export AZURE_TENANT_ID="$(AZURETENANTID)"
+                inspec exec ./Testing-Resourses/azure-inspec-tests/ -t azure:// --chef-license=accept --reporter cli junit:inspectestresults.xml
+          - task: PublishTestResults@2
+            displayName: Publish inspec test results
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFiles: '**/inspectestresults.xml'
+              mergeTestResults: true
 
   - stage: aks_deploy
     displayName: Deploy aspnet app to AKS
@@ -174,8 +192,8 @@ stages :
             AKS_RG="devopsjourneyaks-rg"
             AKS_NAME="devopsjourneyaks"
             # Get AKS Credentials
-            az aks get-credentials -g $AKS_RG -n $AKS_NAME --admin
+            az aks get-credentials -g $AKS_RG -n $AKS_NAME --admin --overwrite-existing  
             # Create secret
             kubectl -n default create secret generic aikey --from-literal=aisecret=$(AIKEY)
             # Apply app
-            kubectl apply -f Deploy-To-AKS/pipelines/scripts/aspnet.yaml 
+            kubectl apply -f Deploy-To-CICD/pipelines/scripts/aspnet.yaml
