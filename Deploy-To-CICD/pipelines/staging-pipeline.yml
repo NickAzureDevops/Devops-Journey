@@ -1,5 +1,7 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
+trigger: none
+
 pool:
   name: Default
 
@@ -8,7 +10,6 @@ trigger:
   branches:
     include:
       - staging
-
 
 # Don't run against PRs
 pr: none
@@ -97,50 +98,43 @@ stages :
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-    - deployment: apply
-      continueOnError: false
-      environment: 'approvalgates-production'
-      timeoutInMinutes: 600
-      strategy:
-       runOnce:
-        deploy:
-            steps:
-              - checkout: none  
+      - job: terraform_apply_develop
+        steps:
+        - task: TerraformInstaller@0
+          displayName: 'install'
+          inputs:
+            terraformVersion: ${{ variables.terraform_version}}
 
-              - task: TerraformInstaller@0
-                displayName: 'install'
-                inputs:
-                  terraformVersion: ${{ variables.terraform_version}}
+        - task: TerraformTaskV2@2
+          displayName: 'init'
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: ${{ variables.backendServiceArm }}
+            backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+            backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+            backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+            backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
-              - task: TerraformTaskV2@2
-                displayName: 'init'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'init'
-                  backendServiceArm: ${{ variables.backendServiceArm }}
-                  backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
-                  backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
-                  backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-                  backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+        - task: TerraformTaskV2@2
+          displayName: 'plan'
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
+            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+            
+        - task: TerraformTaskV2@2
+          displayName: 'apply'
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
+            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
 
-              - task: TerraformTaskV2@2
-                displayName: 'plan'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'plan'
-                  commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
-                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-
-              - task: TerraformTaskV2@2
-                displayName: 'apply'
-                inputs:
-                  provider: 'azurerm'
-                  command: 'apply'
-                  commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
-                  environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
   - stage: Build
     displayName: Build and push stage
     jobs:  
@@ -154,7 +148,7 @@ stages :
           repository: ${{ variables.repository }}
           dockerfile: ${{ variables.dockerfile }}
           containerRegistry: ${{ variables.containerRegistry }}
-          tags: 'latest '
+          tags: $(Build.BuildId)
 
   - stage: aks_deploy
     displayName: Deploy aspnet app to AKS
@@ -179,4 +173,4 @@ stages :
             # Create secret
             kubectl -n default create secret generic aikey --from-literal=aisecret=$(AIKEY)
             # Apply app
-            kubectl apply -f Deploy-To-CICD/pipelines/scripts/aspnet.yaml
+            kubectl apply -f Deploy-To-AKS/pipelines/scripts/aspnet.yaml 
