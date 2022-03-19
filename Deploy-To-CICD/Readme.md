@@ -76,7 +76,13 @@ As we changed the imagePullPolicy to Always, the new pod also change with the la
 
 kubectl describe pod aspnetcore | grep Image Image: azuredevopsjourneyacr.azurecr.io/aspnet:latest
 
-![](/Deploy-To-CICD/images/updatedimage1.png
+![](/Deploy-To-CICD/images/updatedimage1.png)
 
 
 Tips (Please order the pipeline in order of the labs)
+
+- staging pipeline.yml 
+- staging validate.yml
+- production-Validate.yml
+- DR-pipeline.yml 
+- production.yml 
