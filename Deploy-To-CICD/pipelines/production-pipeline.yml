@@ -129,11 +129,10 @@ stages :
         deploy:
             steps:
               - checkout: none  
-
-              - task: TerraformInstaller@0
-                displayName: 'install'
+              - task: DownloadBuildArtifacts@0
                 inputs:
-                  terraformVersion: ${{ variables.terraform_version}}
+                  artifactName: '$(Build.BuildId)-tfplan'
+                  displayName: 'Download Plan Artifact'
 
               - task: ExtractFiles@1
                 inputs:
@@ -141,6 +140,11 @@ stages :
                   destinationFolder: '$(System.DefaultWorkingDirectory)/'
                   cleanDestinationFolder: false
                   displayName: 'Extract Terraform Plan Artifact'
+
+              - task: TerraformInstaller@0
+                displayName: 'install'
+                inputs:
+                  terraformVersion: ${{ variables.terraform_version}}
 
               - task: TerraformTaskV2@2
                 displayName: 'init'

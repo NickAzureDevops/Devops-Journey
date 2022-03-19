@@ -12,6 +12,9 @@ We will cover
 
 This will cover using applications insights to track and montior the deployment created using metrics. Application insight is a feature of Azure montior that let you montior live applications. it can detect performance anomalies and includes tools to fix issues and track what users are doing with your app. 
 
+#### View Application insights in Azure Portal ####
+
+- Open Application insihts that was created in the Azure portal and click on live metrics 
 
 
 
