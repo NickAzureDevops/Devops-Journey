@@ -20,6 +20,47 @@ trigger:
       - master
 
 ```
+### Add Build Artifact to Azure Devops ###
+
+The build stage ends by producing an artefact. Terraform will use the plan and the working directory contents available when applying changes. The working directory must preserve file permissions and other files, or the apply step will fail. We will be creating an archive of the working directory to include all the files required and delete all the unsuccessfully files we do not need. We will be using tar to archive the files. 
+
+Add the following to the production-pipeline in the plan stage 
+
+```
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: '$(Build.SourcesDirectory)/Deploy-To-CICD/pipeline'
+            includeRootFolder: false
+            archiveType: 'tar'
+            tarCompression: 'gz'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).tgz'
+            replaceExistingArchive: true
+            displayName: 'Create Plan Artifact'
+
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)/Deploy-To-CICD/pipeline
+            ArtifactName: '$(Build.BuildId)-tfplan'
+            publishLocation: 'Container'
+            displayName: 'Publish Plan Artifact'    
+
+        - task: DeleteFiles@1
+          displayName: 'Remove unneeded files'
+          inputs:
+            contents: |
+                .terraform
+                tfplan
+
+add this to the apple stage 
+
+- task: ExtractFiles@1
+                inputs:
+                  archiveFilePatterns: '$(System.ArtifactsDirectory)/$(Build.BuildId)-tfplan/$(Build.BuildId).tgz'
+                  destinationFolder: '$(System.DefaultWorkingDirectory)/Deploy-To-CICD/pipeline'
+                  cleanDestinationFolder: false
+                  displayName: 'Extract Terraform Plan Artifact'
+
+```
 
 ### Automated deployment of your AKS Application ###
 
