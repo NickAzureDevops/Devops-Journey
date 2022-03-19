@@ -14,8 +14,6 @@ This will cover using applications insights to track and montior the deployment 
 
 #### View Application insights in Azure Portal ####
 
-- Open Application insihts that was created in the Azure portal and click on live metrics. Please make sure you have the 
+- Open Application insihts that was created in the Azure portal and click on live metrics. Please make a note of the ingress IP address of the application. 
 
-
-## Setup an Application Insights Availability test ##
 
