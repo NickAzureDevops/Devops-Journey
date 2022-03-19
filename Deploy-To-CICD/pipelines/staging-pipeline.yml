@@ -10,12 +10,12 @@ pool:
 
 resources:
   pipelines:
-  - pipeline: CICD-production-validate
-    source: CICD-staging
+  - pipeline: CICD-staging
+    source: CICD-production-validate
     trigger: 
       branches:
         include:
-        - staging/*
+        - main
 
 # Don't run against PRs
 pr: none
