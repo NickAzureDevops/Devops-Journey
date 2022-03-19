@@ -1,13 +1,14 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
+pool:
+  name: Default
+
 trigger:
   batch: true 
   branches:
     include:
       - staging
-pool:
-  name: Default
-
+      
 resources:
   pipelines:
   - pipeline: CICD-staging
@@ -15,7 +16,7 @@ resources:
     trigger: 
       branches:
         include:
-        - main
+        - staging
 
 # Don't run against PRs
 pr: none

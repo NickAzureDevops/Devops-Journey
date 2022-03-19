@@ -1,7 +1,4 @@
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
-
-variables:
-  - group: terraform-develop
   
 pool:
   vmImage: ubuntu-latest
@@ -15,7 +12,6 @@ resources:
         branches:
           include:
             - main       
-
 
 # Don't run against PRs
 pr: none
