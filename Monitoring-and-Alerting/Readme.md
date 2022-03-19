@@ -11,4 +11,3 @@ We will cover
 # Application Insight logs and Metrics #
 
 This will cover using applications insights to track and montior the deployment created using metrics. 
-
