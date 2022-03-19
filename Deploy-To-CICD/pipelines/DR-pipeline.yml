@@ -98,7 +98,7 @@ stages :
 
         - task: ArchiveFiles@2
           inputs:
-            rootFolderOrFile: '$(Build.SourcesDirectory)/Deploy-To-CICD/pipeline'
+            rootFolderOrFile: '$(Build.SourcesDirectory)/'
             includeRootFolder: false
             archiveType: 'tar'
             tarCompression: 'gz'
@@ -108,7 +108,7 @@ stages :
 
         - task: PublishBuildArtifacts@1
           inputs:
-            PathtoPublish: '$(Build.ArtifactStagingDirectory)/Deploy-To-CICD/pipeline
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: '$(Build.BuildId)-tfplan'
             publishLocation: 'Container'
             displayName: 'Publish Plan Artifact'    
@@ -142,7 +142,7 @@ stages :
               - task: ExtractFiles@1
                 inputs:
                   archiveFilePatterns: '$(System.ArtifactsDirectory)/$(Build.BuildId)-tfplan/$(Build.BuildId).tgz'
-                  destinationFolder: '$(System.DefaultWorkingDirectory)/Deploy-To-CICD/pipeline'
+                  destinationFolder: '$(System.DefaultWorkingDirectory)/'
                   cleanDestinationFolder: false
                   displayName: 'Extract Terraform Plan Artifact'
 
