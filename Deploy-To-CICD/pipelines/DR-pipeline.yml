@@ -9,7 +9,7 @@ pool:
 trigger: none 
 resources:
   pipelines:
-    - pipeline: DR-pipeline 
+    - pipeline: none
       source: production-pipeline  
       trigger:
         branches:
