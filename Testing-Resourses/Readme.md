@@ -67,7 +67,7 @@ As you can see when the test is run the result shows you what is wrong. In this 
 
 ![](/Testing-Resourses/images/inspec-running2.png)
 
-## Integration with  Azure DevOps## 
+## Integration with  Azure DevOps ## 
 
 In the previous section, we have successfully run tests locally. Now, we will deploy it via Azure DevOps. By running it in a pipeline, it can easily alert issues to others in your project. We will be looking at how to validate the test of what is expected to be deployed to the actual resources. 
 
