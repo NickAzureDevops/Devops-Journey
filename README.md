@@ -66,7 +66,7 @@ This will create all of the Azure resources from the infrastructure in order to 
 - Run Inspec-Tests using Azure DevOps
 - View Inspec reports in Azure DevOps
 
-7.***Monitoring and Alerting*** [Montioring](https://github.com/nicholaschangIT/Devops-Journey/tree/main Monitoring-and-Alerting)
+7.***Monitoring and Alerting*** [Montioring](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Monitoring-and-Alerting)
 
 - Using Application Insights to view telemetry data!
 - Configure availability test using Application Insights

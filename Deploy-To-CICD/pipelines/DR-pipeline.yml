@@ -141,7 +141,7 @@ stages :
               - task: ExtractFiles@1
                 inputs:
                   archiveFilePatterns: '$(System.ArtifactsDirectory)/$(Build.BuildId)-tfplan/$(Build.BuildId).tgz'
-                  destinationFolder: '$(System.DefaultWorkingDirectory)/'
+                  destinationFolder: '$(System.DefaultWorkingDirectory)/1627-tfplan/'
                   cleanDestinationFolder: false
                   displayName: 'Extract Terraform Plan Artifact'
 

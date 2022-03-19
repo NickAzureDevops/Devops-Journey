@@ -53,10 +53,15 @@ Add the following to the production-pipeline in the plan stage
 
 add this to the apple stage 
 
-- task: ExtractFiles@1
+              - task: DownloadBuildArtifacts@0
+                inputs:
+                  artifactName: '$(Build.BuildId)-tfplan'
+                  displayName: 'Download Plan Artifact'
+
+              - task: ExtractFiles@1
                 inputs:
                   archiveFilePatterns: '$(System.ArtifactsDirectory)/$(Build.BuildId)-tfplan/$(Build.BuildId).tgz'
-                  destinationFolder: '$(System.DefaultWorkingDirectory)/Deploy-To-CICD/pipeline'
+                  destinationFolder: '$(System.DefaultWorkingDirectory)/'
                   cleanDestinationFolder: false
                   displayName: 'Extract Terraform Plan Artifact'
 
