@@ -1,0 +1,138 @@
+trigger: none
+
+pool:
+  name: Default
+# Don't run against PRs
+pr: none
+
+variables:
+  - name: backendServiceArm
+    value: 'SP'
+  - name: backendAzureRmResourceGroupName
+    value: 'devops-journey-rg'
+  - name: backendAzureRmStorageAccountName
+    value: 'devopsjourney'
+  - name: backendAzureRmContainerName
+    value: 'tfstate'
+  - name: backendAzureRmKey
+    value: 'terraform.tfstate'
+  - name: environment
+    value: 'production/production'
+  - name: terraform_version
+    value: '0.15.4'
+  - name: repository
+    value: 'azurejourneydevops'
+  - name: dockerfile
+    value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
+  - name: containerRegistry
+    value: 'devopsjourneyacr'
+
+stages :
+  - stage: validate
+    jobs:
+    - job: validate
+      continueOnError: false
+      steps:
+      - task: TerraformInstaller@0
+        displayName: 'install'
+        inputs:
+          terraformVersion: ${{ variables.terraform_version}}
+      - task: TerraformTaskV2@2
+        displayName: 'init'
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: ${{ variables.backendServiceArm }}
+          backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+          backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+          backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+          backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+      - task: TerraformTaskV2@2
+        displayName: 'validate'
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+          
+  - stage: plan
+    dependsOn: [validate]
+    condition: succeeded('validate')
+    jobs:
+      - job: terraform_plan_develop
+        steps:
+        - task: TerraformInstaller@0
+          displayName: 'install'
+          inputs:
+            terraformVersion: ${{ variables.terraform_version}}
+        - task: TerraformTaskV2@2
+          displayName: 'init'
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: ${{ variables.backendServiceArm }}
+            backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+            backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+            backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+            backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+        - task: TerraformTaskV2@2
+          displayName: 'plan'
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
+            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+
+  - stage: apply
+    dependsOn: [plan]
+    condition: succeeded('plan')
+    jobs:
+      - job: terraform_apply_develop
+        steps:
+        - task: TerraformInstaller@0
+          displayName: 'install'
+          inputs:
+            terraformVersion: ${{ variables.terraform_version}}
+        - task: TerraformTaskV2@2
+          displayName: 'init'
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: ${{ variables.backendServiceArm }}
+            backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+            backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+            backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+            backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+        - task: TerraformTaskV2@2
+          displayName: 'plan'
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
+            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+        - task: TerraformTaskV2@2
+          displayName: 'apply'
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
+            environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+
+  - stage: Build
+    displayName: Build and push stage
+    jobs:  
+    - job: Build
+      displayName: Build job
+      steps:
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          command: buildAndPush
+          repository: ${{ variables.repository }}
+          dockerfile: ${{ variables.dockerfile }}
+          containerRegistry: ${{ variables.containerRegistry }}
+          tags: $(Build.BuildId)
