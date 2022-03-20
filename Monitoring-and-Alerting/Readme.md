@@ -16,4 +16,5 @@ This will cover using applications insights to track and montior the deployment 
 
 - Open Application insihts that was created in the Azure portal and click on live metrics. Please make a note of the ingress IP address of the application. 
 
+- Live Metrics
 
