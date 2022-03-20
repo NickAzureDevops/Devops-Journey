@@ -21,7 +21,7 @@ ssh_public_key     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDrt/GYkYpuQYRxM3lgjO
 acr_name = "azuredevopsjourney"
 
 # App Insights
-app_insights_name = "devopsjourney"
+app_insights_name = "devopsjourneytest"
 application_type  = "web"
 
 # Key vault
