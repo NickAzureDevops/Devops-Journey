@@ -19,7 +19,7 @@ We will be using the following for the lab:
 
 In this setup, I will show you how to set up the Azure DevOps Environment and create the group required for AKS.
 
-1.1 [Azure DevOps Setup](https://github.com/nicholaschangIT/Devops-Journey/blob/main/Azure-Devops-Enviornment-Setup/Environment-Azure-DevOps) - This will set up the Azure DevOps Organisation Setup, Project Creation and create Service Principal.
+1.1 [Azure DevOps Setup](https://github.com/nicholaschangIT/Devops-Journey/tree/main/Azure-Devops-Enviornment-Setup) - This will set up the Azure DevOps Organisation Setup, Project Creation and create Service Principal.
 
 - Creation of Blob Storage location for Terraform State file
 - Create AD Group for AKS Admin Group
