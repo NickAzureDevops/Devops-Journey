@@ -1,9 +1,9 @@
-name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
-
 trigger: none
 
 pool:
   name: Default
+# Don't run against PRs
+pr: none
 
 variables:
   - name: backendServiceArm
@@ -19,14 +19,13 @@ variables:
   - name: environment
     value: 'production/production'
   - name: terraform_version
-    value:  '=0.15.4'
+    value: '0.15.4'
   - name: repository
-    value: 'aspnet'
+    value: 'azurejourneydevops'
   - name: dockerfile
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
     value: 'devopsjourneyacr'
-#  - group: devopsjourney
 
 stages :
   - stage: validate
@@ -48,7 +47,7 @@ stages :
           backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
           backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
           backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-          workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
       - task: TerraformTaskV2@2
         displayName: 'validate'
         inputs:
@@ -75,7 +74,7 @@ stages :
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
@@ -83,7 +82,7 @@ stages :
             command: 'plan'
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
 
   - stage: apply
     dependsOn: [plan]
@@ -105,7 +104,7 @@ stages :
             backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
             backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
             backendAzureRmKey: ${{ variables.backendAzureRmKey }} 
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'plan'
           inputs:
@@ -113,7 +112,7 @@ stages :
             command: 'plan'
             commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
         - task: TerraformTaskV2@2
           displayName: 'apply'
           inputs:
@@ -121,8 +120,8 @@ stages :
             command: 'apply'
             commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
-            workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-  
+            workingDirectory: '$(System.DefaultWorkingDirectory)/AzureDevOpsPipeline/terraform/'
+
   - stage: Build
     displayName: Build and push stage
     jobs:  

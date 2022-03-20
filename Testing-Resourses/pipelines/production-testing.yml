@@ -5,6 +5,9 @@ trigger: none
 pool:
   name: Default
 
+# Don't run against PRs
+pr: none
+
 variables:
   - name: backendServiceArm
     value: 'SP'
@@ -26,7 +29,7 @@ variables:
     value: '$(Build.SourcesDirectory)/Deploy-To-ACR/aspnet-core-dotnet-core/Dockerfile'
   - name: containerRegistry
     value: 'devopsjourneyacr'
-#  - group: devopsjourney
+  - group: devopsjourney
 
 stages :
   - stage: validate
@@ -89,7 +92,7 @@ stages :
     dependsOn: [plan]
     condition: succeeded('plan')
     jobs:
-      - job: terraform_apply_develop
+      - job: terraform_apply
         steps:
         - task: TerraformInstaller@0
           displayName: 'install'
@@ -119,10 +122,10 @@ stages :
           inputs:
             provider: 'azurerm'
             command: 'apply'
-            commandOptions: '-input=false -auto-approve -var-file="../vars/${{ variables.environment }}.tfvars"'
+            commandOptions: '-input=false -var-file="../vars/${{ variables.environment }}.tfvars"'
             environmentServiceNameAzureRM: ${{ variables.backendServiceArm }}
             workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy-To-AKS/terraform/'
-  
+
   - stage: Build
     displayName: Build and push stage
     jobs:  
@@ -136,4 +139,61 @@ stages :
           repository: ${{ variables.repository }}
           dockerfile: ${{ variables.dockerfile }}
           containerRegistry: ${{ variables.containerRegistry }}
-          tags: $(Build.BuildId)
+          tags: 'latest '
+
+
+  - stage: inspec_tests
+    displayName: Inspec Testing
+    jobs:
+      - job: "Checkout"
+        steps:
+          - task: UseRubyVersion@0
+            displayName: 'Install Ruby'
+            inputs:
+              versionSpec: '>= 2.4'
+              addToPath: true
+
+          - script: gem install inspec-bin
+            displayName: 'Install inspec-bin'
+
+          - task: Bash@3
+            displayName: 'Run inspec tests'
+            inputs:
+              targetType: inline
+              script: |
+                export AZURE_SUBSCRIPTION_ID="$(AZURESUBSCRIPTIONID)"
+                export AZURE_CLIENT_ID="$(AZURECLIENTID)"
+                export AZURE_CLIENT_SECRET="$(AZURECLIENTSECRET)"
+                export AZURE_TENANT_ID="$(AZURETENANTID)"
+                inspec exec ./Testing-Resourses/azure-inspec-tests/ -t azure:// --chef-license=accept --reporter cli junit:inspectestresults.xml
+          - task: PublishTestResults@2
+            displayName: Publish inspec test results
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFiles: '**/inspectestresults.xml'
+              mergeTestResults: true
+
+  - stage: aks_deploy
+    displayName: Deploy aspnet app to AKS
+    jobs:  
+    - job: Build
+      displayName: Build job
+      steps:
+      - task: AzureCLI@2
+        displayName: 'Configure AKS Cluster'
+        inputs:
+          azureSubscription: ${{ variables.backendServiceArm }}
+          scriptType: bash
+          scriptLocation: inlineScript
+          addSpnToEnvironment: true
+          inlineScript: |
+            #!/usr/bin/env bash
+            set -x
+            AKS_RG="devopsjourneyaks-rg"
+            AKS_NAME="devopsjourneyaks"
+            # Get AKS Credentials
+            az aks get-credentials -g $AKS_RG -n $AKS_NAME --admin --overwrite-existing  
+            # Create secret
+            kubectl -n default create secret generic aikey --from-literal=aisecret=$(AIKEY)
+            # Apply app
+            kubectl apply -f Deploy-To-CICD/pipelines/scripts/aspnet.yaml

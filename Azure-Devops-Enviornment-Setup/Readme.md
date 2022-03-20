@@ -2,7 +2,9 @@
 
 I will be showing you how to set up the Azure DevOps Environment for this lab.
 
-1. Connect to your Azure subscription via Azure Powershell and run the Azure-Terraform-Remote-Storage and the create-ad-group script to create resources in Azure located under the scripts folder. When deploying Terraform, you must store the configuration files in a state file; this file will be used to deploy Azure resources. We will be going to create the state file and host it in Azure. (If you are running the script in Azure CLI and it is not running, you would need to make the script executable and to do this you will need to add chmod u+x ./scriptname.
+1. Connect to your Azure subscription via Azure Powershell and run both the Azure-Terraform-Remote-Storage and  create-ad-group script to create resources in Azure located under the scripts folder. 
+
+When deploying Terraform you must store the configuration files in a state file; this file will be used to deploy Azure resources. We will be going to create the state file and host it in Azure. (If you are running the script in Azure CLI and it is not running, you would need to make the script executable and to do this you will need to add chmod u+x ./scriptname.
 
 - The terraform-storage script will create Azure Resource Group, Storage Account and Azure Blob storage account
 

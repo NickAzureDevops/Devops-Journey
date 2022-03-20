@@ -71,3 +71,11 @@ This will create all of the Azure resources from the infrastructure in order to 
 - Using Application Insights to view telemetry data!
 - Configure availability test using Application Insights
 - Reviewing Log Analytics Container Insights
+
+
+Tips (Please run the pipeline according to the labs in order). 
+
+- staging pipeline.yml 
+- staging validate.yml
+- production-validate.yml
+- production.yml 
