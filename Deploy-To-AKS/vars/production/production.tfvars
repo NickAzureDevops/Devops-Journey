@@ -1,5 +1,5 @@
  #log Analytics
-log_analytics_workspace_name = "devopsjourneyprd"
+log_analytics_workspace_name = "devopsjourneyst"
 location                     = "uksouth"
 
 # Virtual Network
