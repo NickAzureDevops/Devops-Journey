@@ -1,6 +1,6 @@
 # Using Log Analytics and Container Insights #
 
-You can get data about your container insights from the AKS cluster insight option. Go to your Kubernetes cluster and go to insights under montioring. Select cluster view to see more information. You can also get data from the following too 
+You can get data about your container insights from the AKS cluster insight option. Go to your Kubernetes cluster and go to insights under the monitoring section. Select cluster view to see more information. You can also get data from the following too 
 
 - Cluster
 - Nodes

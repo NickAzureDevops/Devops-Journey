@@ -5,15 +5,16 @@ Application Insight has an Availability test feature that let you send various p
 
 There are four types of availability tests:
 
-- URL ping test- This is used to assess wheather your app is reponding correctly. You can set up custom criteria like parse dependent requests. 
+- URL ping test- This is used to assess whether your app is responding correctly. You can set up custom criteria like parse dependent requests. 
 
-- Standard test (Preview): ping test that include SSL vertification too.  You can also filter sucess criteria and standard test info like the HTTP request. 
+- Standard test (Preview): ping test that includes SSL verification too.  You can also filter success criteria and standard test info like the HTTP request. 
 
 - Multi-step web test (classic): You can monitor a sequence of URLs and interactions with a website via multi-step web tests. These are created in Visual Studio Enterprise and uploaded to the portal. 
 
 - Custom TrackAvailability test: create a custom application to run availability tests, you can use the TrackAvailability method to send the results to Application Insights.
 
-Both the URL ping test and the multi-step web test rely public internet to resolve the domain names. When it is not possible, you can use custom TrackAvailability tests instead.
+Both the URL ping test and the multi-step web test rely on public internet to resolve the domain names. When it is not possible, you can use custom TrackAvailability tests instead.
+
 
 
 ### Creating availability tests ###
